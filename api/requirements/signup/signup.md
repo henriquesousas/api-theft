@@ -1,4 +1,3 @@
-
 > ## Casos de sucesso
 
 1. :black_square_button: Recebe uma requisição do tipo **POST** na rota **/api/signup**
@@ -12,6 +11,7 @@
 9. :black_square_button: **Atualiza** os dados do usuário com o token de acesso gerado
 10. :black_square_button: Retorna **200** com o token de acesso e o nome do usuário
 
+---
 
 > ## Exceções
 
