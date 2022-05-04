@@ -1,3 +1,6 @@
+---
+marp: true
+---
 > ## Casos de sucesso
 
 1. :black_square_button: Recebe uma requisição do tipo **POST** na rota **/api/signup**
@@ -15,7 +18,7 @@
 > ## Exceções
 
 1. :black_square_button: Retorna erro **404** se a API não existir
-2. :black_square_button: Retorna erro **400** se name, email, password não forem fornecidos pelo client
+2. :white_check_mark: Retorna erro **400** se name, email, password não forem fornecidos pelo client
 3. :black_square_button: Retorna erro **400** se o campo email for um e-mail inválido
 4. :black_square_button: Retorna erro **403** se o email fornecido já estiver em uso
 5. :black_square_button: Retorna erro **500** se der erro ao tentar gerar uma senha criptografada
