@@ -4,7 +4,7 @@ import validator from 'validator'
 
 export class EmailValidation implements Validation {
   validate (input: any): Error | null {
-    const isValid = validator.isEmail(input)
+    const isValid = validator.isEmail(input.email)
     if (!isValid) {
       return new InvalidParamError('email')
     }
