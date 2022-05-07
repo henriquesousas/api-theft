@@ -1,6 +1,7 @@
 import { Express, Router } from 'express'
-import accountRouter from './routers/account-router'
+import accountRouter from '../routers/account-router'
 
+// TODO: Import all routers as dynamically
 export default (app: Express): void => {
   const router = Router()
   app.use('/api', router)
