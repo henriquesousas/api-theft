@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
-import { HttpRequest } from '../../controllers/signup'
+import { HttpRequest } from '../../controllers'
 import { SignupController } from '../../controllers/signup/signup-controller'
 import { AddAccountUseCaseImpl } from '../../data/usecases/add-account-usecase-impl'
 import { BCrypterHasher } from '../../infra/criptography/bcrypter-hasher'

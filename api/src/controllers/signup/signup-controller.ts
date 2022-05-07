@@ -1,11 +1,12 @@
-import { AddAccountUseCase } from '../../domain/usecases/add-account-usecase'
+
 import { badRequest, serverError, sucess } from '../../helpers/http/http'
 import {
+  AddAccountUseCase,
   HttpRequest,
   HttpResponse,
   Validation,
   Controller
-} from './index'
+} from '..'
 
 export class SignupController implements Controller {
   constructor (

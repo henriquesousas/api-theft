@@ -1,12 +1,14 @@
-import { Validation } from '../../src/domain/validators/validation'
-import { HttpRequest } from '../../src/helpers/http/http-request'
 import { SignupController } from '../../src/controllers/signup/signup-controller'
 import { ValidationRequiredField } from '../../src/validators/validation-required-field'
 import { ValidationComposite } from '../../src/validators/validation-composite'
 import { serverError } from '../../src/helpers/http/http'
-import { AddAccountUseCase } from '../../src/domain/usecases/add-account-usecase'
 import { AccountDto } from '../../src/domain/dto/account-dto'
 import { Account } from '../../src/domain/models/account'
+import {
+  Validation,
+  HttpRequest,
+  AddAccountUseCase
+} from '../../src/controllers'
 
 interface SutTypes {
   sut: SignupController
