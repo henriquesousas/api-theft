@@ -3,12 +3,12 @@ marp: true
 ---
 > ## Casos de sucesso
 
-1. :black_square_button: Recebe uma requisição do tipo **POST** na rota **/api/signup**
+1. :white_check_mark: Recebe uma requisição do tipo **POST** na rota **/api/signup**
 2. :white_check_mark:  Valida dados obrigatórios **name**, **email**, **password**
 3. :white_check_mark: Valida que o campo **email** é um e-mail válido
 4. :black_square_button: **Valida** se já existe um usuário com o email fornecido
-5. :black_square_button: Gera uma senha **criptografada** (essa senha não pode ser descriptografada)
-6. :black_square_button: **Cria** uma conta para o usuário com os dados informados, **substituindo** a senha pela senha criptorafada
+5. :white_check_mark: Gera uma senha **criptografada** (essa senha não pode ser descriptografada)
+6. :white_check_mark:  **Cria** uma conta para o usuário com os dados informados, **substituindo** a senha pela senha criptorafada
 7. :black_square_button: Gera um **token** de acesso a partir do ID do usuário
 8. :black_square_button: **Atualiza** os dados do usuário com o token de acesso gerado
 9. :black_square_button: Retorna **200** com o token de acesso e o nome do usuário
