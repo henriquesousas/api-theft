@@ -56,7 +56,7 @@ describe('AuthenticationUseCase', () => {
     const { sut, hasherComparerStub } = makeSut()
     const hashComparerSpy = jest.spyOn(hasherComparerStub, 'comparer')
     await sut.login('any_email', 'any_password')
-    expect(hashComparerSpy).toHaveBeenCalledWith('hashed_password', 'any_password')
+    expect(hashComparerSpy).toHaveBeenCalledWith('any_password', 'hashed_password')
   })
 
   test('deve lançar uma exception LoadAccountByEmailRepository', async () => {
