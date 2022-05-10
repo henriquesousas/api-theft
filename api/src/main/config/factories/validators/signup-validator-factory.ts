@@ -4,7 +4,7 @@ import { ValidationComposite } from '../../../../validators/validation-composite
 import { ValidationEmailField } from '../../../../validators/validation-email-field'
 import { ValidationRequiredField } from '../../../../validators/validation-required-field'
 
-export const buildSignupValidatorFactory = (): Validation => {
+export const makeSignupValidatorFactory = (): Validation => {
   return new ValidationComposite([
     new ValidationRequiredField('name'),
     new ValidationRequiredField('email'),

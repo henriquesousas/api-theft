@@ -12,7 +12,7 @@ import { EmailInUseError } from '../../helpers/erros/email-in-user-error'
 export class SignupController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly usecase: AddAccount
+    private readonly addAccounseUseCase: AddAccount
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
@@ -22,7 +22,7 @@ export class SignupController implements Controller {
         return badRequest(error)
       }
       const { name, email, password } = request.body
-      const account = await this.usecase.add({
+      const account = await this.addAccounseUseCase.add({
         name,
         email,
         password
@@ -34,7 +34,7 @@ export class SignupController implements Controller {
 
       return sucess(account)
     } catch (error) {
-      // console.log(error)
+      console.log(error)
       return serverError(error)
     }
   }

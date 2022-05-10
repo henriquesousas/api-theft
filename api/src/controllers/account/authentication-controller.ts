@@ -1,6 +1,6 @@
 import { Authentication } from '../../domain/usecases/authentication'
 import { Validation } from '../../domain/validators/validation'
-import { badRequest, serverError, sucess } from '../../helpers/http/http'
+import { badRequest, serverError, sucess, unauthorized } from '../../helpers/http/http'
 import { HttpRequest } from '../../helpers/http/http-request'
 import { HttpResponse } from '../../helpers/http/http-response'
 import { Controller } from '../controller'
@@ -20,7 +20,7 @@ export class AuthenticationController implements Controller {
       }
       const account = await this.loginUseCase.login(email, password)
       if (!account) {
-        return badRequest(new Error())
+        return unauthorized()
       }
       return sucess(account)
     } catch (error) {
