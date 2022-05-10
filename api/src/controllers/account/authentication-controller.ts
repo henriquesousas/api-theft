@@ -1,14 +1,14 @@
-import { LoginUseCase } from '../domain/usecases/login-usecase'
-import { Validation } from '../domain/validators/validation'
-import { badRequest, serverError, sucess } from '../helpers/http/http'
-import { HttpRequest } from '../helpers/http/http-request'
-import { HttpResponse } from '../helpers/http/http-response'
-import { Controller } from './controller'
+import { Authentication } from '../../domain/usecases/authentication'
+import { Validation } from '../../domain/validators/validation'
+import { badRequest, serverError, sucess } from '../../helpers/http/http'
+import { HttpRequest } from '../../helpers/http/http-request'
+import { HttpResponse } from '../../helpers/http/http-response'
+import { Controller } from '../controller'
 
-export class LoginController implements Controller {
+export class AuthenticationController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly loginUseCase: LoginUseCase
+    private readonly loginUseCase: Authentication
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {

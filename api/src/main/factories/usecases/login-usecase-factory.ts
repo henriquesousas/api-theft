@@ -1,8 +1,8 @@
-import { LoginUseCaseImpl } from '../../../data/usecases/login-usecase-impl'
-import { LoginUseCase } from '../../../domain/usecases/login-usecase'
+import { AuthenticationUseCase } from '../../../data/usecases/authentication-usecase'
+import { Authentication } from '../../../domain/usecases/authentication'
 import { AccountMongoRepositoy } from '../../../infra/repository/mongo/account-mongo-repository'
 
-export const makeLoginUseCaseFactory = (): LoginUseCase => {
+export const makeLoginUseCaseFactory = (): Authentication => {
   const loadAccountByEmailRepository = new AccountMongoRepositoy()
-  return new LoginUseCaseImpl(loadAccountByEmailRepository)
+  return new AuthenticationUseCase(loadAccountByEmailRepository)
 }

@@ -1,10 +1,10 @@
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/load-account-by-email-repository'
-import { LoginUseCaseImpl } from '../../../src/data/usecases/login-usecase-impl'
+import { AuthenticationUseCase } from '../../../src/data/usecases/authentication-usecase'
 import { Account } from '../../../src/domain/models/account'
-import { LoginUseCase } from '../../../src/domain/usecases/login-usecase'
+import { Authentication } from '../../../src/domain/usecases/authentication'
 
 interface SutTypes {
-  sut: LoginUseCase
+  sut: Authentication
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
 }
 
@@ -24,7 +24,7 @@ const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 
 const makeSut = (): SutTypes => {
   const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository()
-  const sut = new LoginUseCaseImpl(loadAccountByEmailRepositoryStub)
+  const sut = new AuthenticationUseCase(loadAccountByEmailRepositoryStub)
   return {
     sut,
     loadAccountByEmailRepositoryStub

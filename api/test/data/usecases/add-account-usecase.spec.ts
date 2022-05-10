@@ -1,5 +1,5 @@
 import { AddAccountRepositoy } from '../../../src/data/protocols/repository/add-account-repository'
-import { AddAccountUseCaseImpl } from '../../../src/data/usecases/add-account-usecase-impl'
+import { AddAccountUseCase } from '../../../src/data/usecases/add-account-usecase'
 import { AccountDto } from '../../../src/domain/dto/account-dto'
 import { Account } from '../../../src/domain/models/account'
 import { BCrypterHasher } from '../../../src/infra/criptography/bcrypter-hasher'
@@ -44,7 +44,7 @@ describe('AddAccountUseCase', () => {
     const salt = 12
     const hasherPassword = new BCrypterHasher(salt)
     const accountRepository = buildAddAccountRepositoryStub()
-    const sut = new AddAccountUseCaseImpl(hasherPassword, accountRepository)
+    const sut = new AddAccountUseCase(hasherPassword, accountRepository)
     const hasherSpy = jest.spyOn(hasherPassword, 'hash')
     await sut.add(accountDto)
     expect(hasherSpy).toHaveBeenCalledWith('any_password')

@@ -1,8 +1,8 @@
 import { Account } from '../../domain/models/account'
-import { LoginUseCase } from '../../domain/usecases/login-usecase'
+import { Authentication } from '../../domain/usecases/authentication'
 import { LoadAccountByEmailRepository } from '../protocols/repository/load-account-by-email-repository'
 
-export class LoginUseCaseImpl implements LoginUseCase {
+export class AuthenticationUseCase implements Authentication {
   constructor (
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) { }

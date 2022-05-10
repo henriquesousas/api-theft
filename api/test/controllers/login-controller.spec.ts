@@ -1,16 +1,16 @@
 import { HttpRequest, Validation } from '../../src/controllers'
-import { LoginController } from '../../src/controllers/login-controller'
-import { LoginUseCaseImpl } from '../../src/data/usecases/login-usecase-impl'
+import { AuthenticationController } from '../../src/controllers/account/authentication-controller'
+import { AuthenticationUseCase } from '../../src/data/usecases/authentication-usecase'
 import { Account } from '../../src/domain/models/account'
-import { LoginUseCase } from '../../src/domain/usecases/login-usecase'
+import { Authentication } from '../../src/domain/usecases/authentication'
 import { serverError } from '../../src/helpers/http/http'
 import { ValidationComposite } from '../../src/validators/validation-composite'
 import { ValidationRequiredField } from '../../src/validators/validation-required-field'
 
 interface SutTypes {
-  sut: LoginController
+  sut: AuthenticationController
   validationStub: Validation
-  loginUseCaseStub: LoginUseCase
+  loginUseCaseStub: Authentication
 }
 
 const makefakeRequest = (): HttpRequest => {
@@ -22,8 +22,8 @@ const makefakeRequest = (): HttpRequest => {
   }
 }
 
-const makeLoginUseCase = (): LoginUseCase => {
-  class LoginUseCaseStub implements LoginUseCase {
+const makeLoginUseCase = (): Authentication => {
+  class LoginUseCaseStub implements Authentication {
     async login (email: string, password: string): Promise<Account | null> {
       return await new Promise(resolve => resolve(null))
     }
@@ -37,7 +37,7 @@ const makeSut = (): SutTypes => {
     new ValidationRequiredField('email')]
   )
   const loginUseCaseStub = makeLoginUseCase()
-  const sut = new LoginController(validationStub, loginUseCaseStub)
+  const sut = new AuthenticationController(validationStub, loginUseCaseStub)
   return {
     sut,
     loginUseCaseStub,

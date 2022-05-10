@@ -1,4 +1,4 @@
-import { SignupController } from '../../src/controllers/signup/signup-controller'
+import { SignupController } from '../../src/controllers/account/signup-controller'
 import { ValidationRequiredField } from '../../src/validators/validation-required-field'
 import { ValidationComposite } from '../../src/validators/validation-composite'
 import { serverError } from '../../src/helpers/http/http'
@@ -7,13 +7,13 @@ import { Account } from '../../src/domain/models/account'
 import {
   Validation,
   HttpRequest,
-  AddAccountUseCase
+  AddAccount
 } from '../../src/controllers'
 
 interface SutTypes {
   sut: SignupController
   compositeValidationStub: Validation
-  addAccountUseCaseStub: AddAccountUseCase
+  addAccountUseCaseStub: AddAccount
 }
 
 const buildCompositeValidationStub = (): Validation => {
@@ -21,8 +21,8 @@ const buildCompositeValidationStub = (): Validation => {
   return new ValidationComposite(validators)
 }
 
-const buildAddAccountUseCaseStub = (): AddAccountUseCase => {
-  class AddAccountUseCaseStub implements AddAccountUseCase {
+const buildAddAccountUseCaseStub = (): AddAccount => {
+  class AddAccountUseCaseStub implements AddAccount {
     async add (dto: AccountDto): Promise<Account> {
       const account: Account = {
         id: 'any_id',

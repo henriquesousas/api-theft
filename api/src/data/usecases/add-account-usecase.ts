@@ -1,10 +1,10 @@
 import { AccountDto } from '../../domain/dto/account-dto'
 import { Account } from '../../domain/models/account'
-import { AddAccountUseCase } from '../../domain/usecases/add-account-usecase'
+import { AddAccount } from '../../domain/usecases/add-account'
 import { Hasher } from '../protocols/cryptography/hasher'
 import { AddAccountRepositoy } from '../protocols/repository/add-account-repository'
 
-export class AddAccountUseCaseImpl implements AddAccountUseCase {
+export class AddAccountUseCase implements AddAccount {
   constructor (
     private readonly hasher: Hasher,
     private readonly addAccountRepository: AddAccountRepositoy
