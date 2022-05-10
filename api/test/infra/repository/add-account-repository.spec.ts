@@ -1,6 +1,6 @@
 import { AccountDto } from '../../../src/domain/dto/account-dto'
-import { AccountMongoRepositoy } from '../../../src/infra/repository/mongo/account-mongo-repository'
-import { MongoHelper } from '../../../src/infra/repository/mongo/helper/mongo-helper'
+import { AccountMongoRepositoy } from '../../../src/infra/repository/account-mongo-repository'
+import { MongoHelper } from '../../../src/infra/repository/helper/mongo-helper'
 import env from '../../../src/main/config/env'
 
 describe('AddAccountRepository', () => {

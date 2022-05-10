@@ -1,7 +1,7 @@
 import { AddAccount } from '../../../../controllers'
 import { AddAccountUseCase } from '../../../../data/usecases/add-account-usecase'
 import { BCrypter } from '../../../../infra/criptography/bcrypter'
-import { AccountMongoRepositoy } from '../../../../infra/repository/mongo/account-mongo-repository'
+import { AccountMongoRepositoy } from '../../../../infra/repository/account-mongo-repository'
 
 export const makeAddAccountUseCaseFactory = (): AddAccount => {
   const salt = 12

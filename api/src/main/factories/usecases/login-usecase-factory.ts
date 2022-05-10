@@ -1,7 +1,7 @@
 import { AuthenticationUseCase } from '../../../data/usecases/authentication-usecase'
 import { Authentication } from '../../../domain/usecases/authentication'
 import { BCrypter } from '../../../infra/criptography/bcrypter'
-import { AccountMongoRepositoy } from '../../../infra/repository/mongo/account-mongo-repository'
+import { AccountMongoRepositoy } from '../../../infra/repository/account-mongo-repository'
 
 export const makeLoginUseCaseFactory = (): Authentication => {
   const salt = 12
