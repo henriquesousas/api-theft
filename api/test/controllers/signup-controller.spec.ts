@@ -4,26 +4,26 @@ import { ValidationComposite } from '../../src/validators/validation-composite'
 import { serverError } from '../../src/helpers/http/http'
 import { AccountDto } from '../../src/domain/dto/account-dto'
 import { Account } from '../../src/domain/models/account'
-import {
-  Validation,
-  HttpRequest,
-  AddAccount
-} from '../../src/controllers'
+import { Validation, HttpRequest, AddAccount } from '../../src/controllers/import-protocols'
 
 interface SutTypes {
   sut: SignupController
-  compositeValidationStub: Validation
+  validationStub: Validation
   addAccountUseCaseStub: AddAccount
 }
 
-const buildCompositeValidationStub = (): Validation => {
-  const validators = [new ValidationRequiredField('name')]
-  return new ValidationComposite(validators)
+const makeValidationStub = (): Validation => {
+  class ValidationStub implements Validation {
+    validate(input: any): Error | null {
+      return null
+    }
+  }
+  return new ValidationStub()
 }
 
-const buildAddAccountUseCaseStub = (): AddAccount => {
+const makeAddAccountUseCaseStub = (): AddAccount => {
   class AddAccountUseCaseStub implements AddAccount {
-    async add (dto: AccountDto): Promise<Account> {
+    async add(dto: AccountDto): Promise<Account> {
       const account: Account = {
         id: 'any_id',
         name: 'any_name',
@@ -36,7 +36,7 @@ const buildAddAccountUseCaseStub = (): AddAccount => {
   return new AddAccountUseCaseStub()
 }
 
-const buildFakeRequest = (): HttpRequest => {
+const makeFakeRequest = (): HttpRequest => {
   const httpRequest = {
     body: {
       name: 'any_nam',
@@ -47,54 +47,56 @@ const buildFakeRequest = (): HttpRequest => {
   return httpRequest
 }
 
-const buildSut = (): SutTypes => {
-  const compositeValidationStub = buildCompositeValidationStub()
-  const addAccountUseCaseStub = buildAddAccountUseCaseStub()
-  const sut = new SignupController(compositeValidationStub, addAccountUseCaseStub)
+const makeSut = (): SutTypes => {
+  const validationStub = makeValidationStub()
+  const addAccountUseCaseStub = makeAddAccountUseCaseStub()
+  const sut = new SignupController(validationStub, addAccountUseCaseStub)
   return {
     sut,
-    compositeValidationStub,
+    validationStub,
     addAccountUseCaseStub
   }
 }
 
 describe('SignupController', () => {
-  test('deve chamar o CompositeValidation com o valores corretos', async () => {
-    const { sut, compositeValidationStub } = buildSut()
-    const validateSpy = jest.spyOn(compositeValidationStub, 'validate')
-    await sut.handle(buildFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith(buildFakeRequest().body)
+  test('deve chamar o validation com os valores corretos', async () => {
+    const { sut, validationStub } = makeSut()
+    const validationSpy = jest.spyOn(validationStub, 'validate')
+    await sut.handle(makeFakeRequest())
+    expect(validationSpy).toHaveBeenCalledWith(makeFakeRequest().body)
   })
 
-  test('deve chamar o AddAccountUseCase com o valores corretos', async () => {
-    const { sut, addAccountUseCaseStub } = buildSut()
+  test('deve chamar o AddAccountUseCase com os valores corretos', async () => {
+    const { sut, addAccountUseCaseStub } = makeSut()
     const addAccountUseCaseSpy = jest.spyOn(addAccountUseCaseStub, 'add')
-    await sut.handle(buildFakeRequest())
-    expect(addAccountUseCaseSpy).toHaveBeenCalledWith(buildFakeRequest().body)
+    const fakeRequest = makeFakeRequest()
+    await sut.handle(fakeRequest)
+    expect(addAccountUseCaseSpy).toHaveBeenCalledWith(fakeRequest.body)
   })
 
-  test('deve retornar null se o CompositeValidation passar', async () => {
-    const { sut, compositeValidationStub } = buildSut()
-    const validateSpy = jest.spyOn(compositeValidationStub, 'validate')
-    await sut.handle(buildFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith(buildFakeRequest().body)
+  test('deve retornar null se o validation validar com sucesso', async () => {
+    const { sut, validationStub } = makeSut()
+    const validationSpy = jest.spyOn(validationStub, 'validate')
+    const fakeRequest = makeFakeRequest()
+    await sut.handle(fakeRequest)
+    expect(validationSpy).toHaveBeenCalledWith(fakeRequest.body)
   })
 
-  test('deve retornar serverError (exceção) se o validation throws', async () => {
-    const { sut, compositeValidationStub } = buildSut()
-    jest.spyOn(compositeValidationStub, 'validate').mockImplementationOnce(() => {
+  test('deve retornar uma exception se o validation throws', async () => {
+    const { sut, validationStub } = makeSut()
+    jest.spyOn(validationStub, 'validate').mockImplementationOnce(() => {
       throw new Error()
     })
-    const httpResponse = await sut.handle(buildFakeRequest())
+    const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
-  test('deve retornar serverError (exceção) se o AddAccountUseCase throws', async () => {
-    const { sut, addAccountUseCaseStub } = buildSut()
+  test('deve retornar uma exception se o AddAccountUseCase throws', async () => {
+    const { sut, addAccountUseCaseStub } = makeSut()
     jest.spyOn(addAccountUseCaseStub, 'add').mockImplementationOnce(() => {
       throw new Error()
     })
-    const httpResponse = await sut.handle(buildFakeRequest())
+    const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 })

@@ -7,7 +7,7 @@ describe('EmailValidation', () => {
     expect(error).toEqual(false)
   })
 
-  test('deve retornar sucesso true se email for valido', async () => {
+  test('deve retornar true se email for valido', async () => {
     const sut = new EmailValidation()
     const error = sut.isValid('any_email@gmail.com')
     expect(error).toEqual(true)
