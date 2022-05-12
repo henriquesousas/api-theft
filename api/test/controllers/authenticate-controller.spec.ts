@@ -1,6 +1,5 @@
-import { HttpRequest, Validation } from '../../src/controllers'
+import { HttpRequest, Validation } from '../../src/controllers/import-protocols'
 import { AuthenticationController } from '../../src/controllers/account/authentication-controller'
-import { AuthenticationUseCase } from '../../src/data/usecases/authentication-usecase'
 import { Account } from '../../src/domain/models/account'
 import { Authentication } from '../../src/domain/usecases/authentication'
 import { serverError } from '../../src/helpers/http/http'
@@ -45,7 +44,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('LoginController', () => {
+describe('AuthenticationController', () => {
   test('deve chamar o Validate com os valores correto', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')

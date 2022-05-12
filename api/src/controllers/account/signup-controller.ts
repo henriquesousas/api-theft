@@ -1,13 +1,7 @@
 
 import { badRequest, forbidden, serverError, sucess } from '../../helpers/http/http'
-import {
-  AddAccount,
-  HttpRequest,
-  HttpResponse,
-  Validation,
-  Controller
-} from '..'
 import { EmailInUseError } from '../../helpers/erros/email-in-user-error'
+import { AddAccount, HttpRequest, HttpResponse, Validation, Controller } from '../import-protocols'
 
 export class SignupController implements Controller {
   constructor (
@@ -34,7 +28,7 @@ export class SignupController implements Controller {
 
       return sucess(account)
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return serverError(error)
     }
   }
