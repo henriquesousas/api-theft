@@ -7,6 +7,7 @@
       "@typescript-eslint/method-signature-style": "off",
       "@typescript-eslint/strict-boolean-expressions": "off",
       "@typescript-eslint/space-before-function-paren": "off",
-      "no-trailing-spaces": "off"
+      "no-trailing-spaces": "off",
+      "@typescript-eslint/consistent-type-definitions":"off"
     }
   }

@@ -1,10 +1,9 @@
 import { SignupController } from '../../src/controllers/account/signup-controller'
-import { ValidationRequiredField } from '../../src/validators/validation-required-field'
-import { ValidationComposite } from '../../src/validators/validation-composite'
-import { serverError } from '../../src/helpers/http/http'
+import { forbidden, serverError } from '../../src/helpers/http/http'
 import { AccountDto } from '../../src/domain/dto/account-dto'
 import { Account } from '../../src/domain/models/account'
 import { Validation, HttpRequest, AddAccount } from '../../src/controllers/import-protocols'
+import { EmailInUseError } from '../../src/helpers/erros/email-in-user-error'
 
 interface SutTypes {
   sut: SignupController
@@ -98,5 +97,12 @@ describe('SignupController', () => {
     })
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('deve retornar forbidden EmailInUseError se o email já foi cadastrado', async () => {
+    const { sut, addAccountUseCaseStub } = makeSut()
+    jest.spyOn(addAccountUseCaseStub, 'add').mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
 })
