@@ -1,5 +1,5 @@
-import { AddAccountRepositoy } from '../../data/protocols/repository/add-account-repository'
-import { LoadAccountByEmailRepository } from '../../data/protocols/repository/load-account-by-email-repository'
+import { AddAccountRepositoy } from '../../data/protocols/repository/account/add-account-repository'
+import { LoadAccountByEmailRepository } from '../../data/protocols/repository/account/load-account-by-email-repository'
 import { AccountDto } from '../../domain/dto/account-dto'
 import { Account } from '../../domain/models/account'
 import { MongoHelper } from './helper/mongo-helper'

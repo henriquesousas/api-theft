@@ -1,5 +1,5 @@
 import { Controller } from '../../../../src/controllers/controller'
-import { LogguerRepository } from '../../../../src/data/protocols/repository/logguer-repository'
+import { LogguerRepository } from '../../../../src/data/protocols/repository/logguer/logguer-repository'
 import { serverError } from '../../../../src/helpers/http/http'
 import { LogguerControllerDecorator } from '../../../../src/main/config/decorator/logguer-controller.decorator'
 import { mockLogguerRepository } from '../../../infra/repository/mocks'

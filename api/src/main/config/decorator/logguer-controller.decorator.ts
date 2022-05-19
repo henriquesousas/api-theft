@@ -1,6 +1,6 @@
 import { Controller } from '../../../controllers/controller'
 import { HttpRequest, HttpResponse } from '../../../controllers/import-protocols'
-import { LogguerRepository } from '../../../data/protocols/repository/logguer-repository'
+import { LogguerRepository } from '../../../data/protocols/repository/logguer/logguer-repository'
 
 export class LogguerControllerDecorator implements Controller {
   constructor(

@@ -1,4 +1,4 @@
-import { LogguerRepository } from '../../../../src/data/protocols/repository/logguer-repository'
+import { LogguerRepository } from '../../../../src/data/protocols/repository/logguer/logguer-repository'
 
 export const mockLogguerRepository = (): LogguerRepository => {
   class LogguerRepositoryStub implements LogguerRepository {

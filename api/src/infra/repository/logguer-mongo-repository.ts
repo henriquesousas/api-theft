@@ -1,4 +1,4 @@
-import { LogguerRepository } from '../../data/protocols/repository/logguer-repository'
+import { LogguerRepository } from '../../data/protocols/repository/logguer/logguer-repository'
 import { MongoHelper } from './helper/mongo-helper'
 
 export class LogguerMongoRepository implements LogguerRepository {

@@ -1,5 +1,5 @@
-import { AddAccountRepositoy } from '../../../../src/data/protocols/repository/add-account-repository'
-import { LoadAccountByEmailRepository } from '../../../../src/data/protocols/repository/load-account-by-email-repository'
+import { AddAccountRepositoy } from '../../../../src/data/protocols/repository/account/add-account-repository'
+import { LoadAccountByEmailRepository } from '../../../../src/data/protocols/repository/account/load-account-by-email-repository'
 import { AccountDto } from '../../../../src/domain/dto/account-dto'
 import { Account } from '../../../../src/domain/models/account'
 
