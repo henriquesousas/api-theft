@@ -1,5 +1,5 @@
 import { AddAccount } from '../../../controllers/import-protocols'
-import { AddAccountUseCase } from '../../../data/usecases/add-account-usecase'
+import { AddAccountUseCase } from '../../../data/usecases/account/add-account-usecase'
 import { BCrypter } from '../../../infra/criptography/bcrypter'
 import { AccountMongoRepositoy } from '../../../infra/repository/account-mongo-repository'
 

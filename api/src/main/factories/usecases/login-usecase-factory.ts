@@ -1,4 +1,4 @@
-import { AuthenticationUseCase } from '../../../data/usecases/authentication-usecase'
+import { AuthenticationUseCase } from '../../../data/usecases/account/authentication-usecase'
 import { Authentication } from '../../../domain/usecases/authentication'
 import { BCrypter } from '../../../infra/criptography/bcrypter'
 import { AccountMongoRepositoy } from '../../../infra/repository/account-mongo-repository'

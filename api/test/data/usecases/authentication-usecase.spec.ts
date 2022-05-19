@@ -1,9 +1,9 @@
 
 import { HashComparer } from '../../../src/data/protocols/cryptography/hasher-comparer'
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/load-account-by-email-repository'
-import { AuthenticationUseCase } from '../../../src/data/usecases/authentication-usecase'
+import { AuthenticationUseCase } from '../../../src/data/usecases/account/authentication-usecase'
 import { Account } from '../../../src/domain/models/account'
-import { Authentication } from '../../../src/domain/usecases/authentication'
+import { Authentication } from '../../../src/domain/usecases/account/authentication'
 import { mockHasherComparer } from '../../infra/criptography/mocks'
 
 type SutTypes = {

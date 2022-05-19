@@ -1,7 +1,7 @@
 import { Hasher } from '../../../src/data/protocols/cryptography/hasher'
 import { AddAccountRepositoy } from '../../../src/data/protocols/repository/add-account-repository'
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/load-account-by-email-repository'
-import { AddAccountUseCase } from '../../../src/data/usecases/add-account-usecase'
+import { AddAccountUseCase } from '../../../src/data/usecases/account/add-account-usecase'
 import { BCrypter } from '../../../src/infra/criptography/bcrypter'
 import { mockAddAccountRepositoryStub, mockLoadAccountByEmailRepository } from '../../infra/repository/mocks'
 import { mockAccountDto } from '../../domain'
