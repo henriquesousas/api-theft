@@ -1,11 +1,11 @@
-import { Validation } from '../../src/controllers/import-protocols'
-import { AuthenticationController } from '../../src/controllers/account/authentication-controller'
-import { Authentication } from '../../src/domain/usecases/account/authentication'
-import { serverError } from '../../src/helpers/http/http'
-import { ValidationComposite } from '../../src/validators/validation-composite'
-import { ValidationRequiredField } from '../../src/validators/validation-required-field'
-import { mockAuthenticateUseCase } from '../data/usecases/mocks'
-import { mockFakeRequestWithoutName } from '../http/mock-account-request'
+import { Validation } from '../../../src/controllers/import-protocols'
+import { AuthenticationController } from '../../../src/controllers/account/authentication-controller'
+import { Authentication } from '../../../src/domain/usecases/account/authentication'
+import { serverError } from '../../../src/helpers/http/http'
+import { ValidationComposite } from '../../../src/validators/validation-composite'
+import { ValidationRequiredField } from '../../../src/validators/validation-required-field'
+import { mockAuthenticateUseCase } from '../../data/usecases/mocks'
+import { mockFakeRequestWithoutName } from '../../http/mock-account-request'
 
 type SutTypes = {
   sut: AuthenticationController

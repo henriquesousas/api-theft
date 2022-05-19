@@ -1,10 +1,10 @@
-import { SignupController } from '../../src/controllers/account/signup-controller'
-import { forbidden, serverError } from '../../src/helpers/http/http'
-import { AddAccount, Validation } from '../../src/controllers/import-protocols'
-import { EmailInUseError } from '../../src/helpers/erros/email-in-user-error'
-import { mockAddAccountUseCase } from '../data/usecases/mocks'
-import { mockValidation } from '../validators/mocks'
-import { mockFakeRequest } from '../http'
+import { SignupController } from '../../../src/controllers/account/signup-controller'
+import { forbidden, serverError } from '../../../src/helpers/http/http'
+import { AddAccount, Validation } from '../../../src/controllers/import-protocols'
+import { EmailInUseError } from '../../../src/helpers/erros/email-in-user-error'
+import { mockAddAccountUseCase } from '../../data/usecases/mocks'
+import { mockValidation } from '../../validators/mocks'
+import { mockFakeRequest } from '../../http'
 
 type SutTypes = {
   sut: SignupController
