@@ -1,8 +1,9 @@
-import { AccountDto } from '../../../src/domain/dto/account-dto'
 import { AccountMongoRepositoy } from '../../../src/infra/repository/account-mongo-repository'
+import { mockAccountDto } from '../../domain/dto/mock-account-dto'
 import { MongoHelper } from '../../../src/infra/repository/helper/mongo-helper'
 import env from '../../../src/main/config/env'
 
+// TODO: must create a test for loadByEmail()
 describe('AddAccountRepository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(env.mongoUrl)
@@ -18,13 +19,8 @@ describe('AddAccountRepository', () => {
   })
 
   test('deve criar uma conta com sucesso', async () => {
-    const accountDto: AccountDto = {
-      name: 'any_name',
-      email: 'any_email',
-      password: 'any_password'
-    }
     const sut = new AccountMongoRepositoy()
-    const account = await sut.add(accountDto)
+    const account = await sut.add(mockAccountDto())
     expect(account).toBeTruthy()
     expect(account.id).toBeTruthy()
     expect(account.name).toBe('any_name')

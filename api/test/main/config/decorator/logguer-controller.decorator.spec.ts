@@ -1,8 +1,10 @@
 import { Controller } from '../../../../src/controllers/controller'
-import { HttpRequest, HttpResponse } from '../../../../src/controllers/import-protocols'
 import { LogguerRepository } from '../../../../src/data/protocols/repository/logguer-repository'
 import { serverError } from '../../../../src/helpers/http/http'
 import { LogguerControllerDecorator } from '../../../../src/main/config/decorator/logguer-controller.decorator'
+import { mockLogguerRepository } from '../../../infra/repository/mocks'
+import { mockBaseController } from '../../../controllers/mocks/mock-controller'
+import { mockFakeRequest } from '../../../http'
 
 type SutType = {
   sut: LogguerControllerDecorator
@@ -10,36 +12,9 @@ type SutType = {
   controllerStub: Controller
 }
 
-const makeFakeRequest = (): HttpRequest => {
-  return {
-    body: 'any_body'
-  }
-}
-
-const makeControllerStub = (): Controller => {
-  class ControllerStub implements Controller {
-    async handle(request: HttpRequest): Promise<HttpResponse> {
-      const httpResponse = {
-        statusCode: 200,
-        body: 'any_body'
-      }
-      return await new Promise(resolve => resolve(httpResponse))
-    }
-  }
-  return new ControllerStub()
-}
-
-const makeLogguerRepositoryStub = (): LogguerRepository => {
-  class LogguerRepositoryStub implements LogguerRepository {
-    async log(message: string): Promise<void> {
-    }
-  }
-  return new LogguerRepositoryStub()
-}
-
-const makeSut = (): SutType => {
-  const controllerStub = makeControllerStub()
-  const logguerRepositoryStub = makeLogguerRepositoryStub()
+const mockSut = (): SutType => {
+  const controllerStub = mockBaseController()
+  const logguerRepositoryStub = mockLogguerRepository()
   const sut = new LogguerControllerDecorator(controllerStub, logguerRepositoryStub)
   return {
     sut,
@@ -48,23 +23,23 @@ const makeSut = (): SutType => {
   }
 }
 
-describe('LoggerController', () => {
+describe('LogguerController', () => {
   test('deve chamar o Controller com o valor correto', async () => {
-    const { sut, controllerStub } = makeSut()
+    const { sut, controllerStub } = mockSut()
     const controllerSpy = jest.spyOn(controllerStub, 'handle')
-    await sut.handle(makeFakeRequest())
-    expect(controllerSpy).toHaveBeenCalledWith(makeFakeRequest())
+    await sut.handle(mockFakeRequest())
+    expect(controllerSpy).toHaveBeenCalledWith(mockFakeRequest())
   })
 
   test('deve retornar serverError quando o controller falhar', async () => {
-    const { sut, controllerStub } = makeSut()
+    const { sut, controllerStub } = mockSut()
     jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(new Promise(resolve => resolve(serverError(new Error()))))
-    const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(mockFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('deve chamar o LogguerRepository com o valor correto', async () => {
-    const { sut, logguerRepositoryStub, controllerStub } = makeSut()
+    const { sut, logguerRepositoryStub, controllerStub } = mockSut()
 
     const error = new Error()
     error.stack = 'any_error'
@@ -77,7 +52,7 @@ describe('LoggerController', () => {
     jest.spyOn(controllerStub, 'handle')
       .mockReturnValueOnce(new Promise(resolve => resolve(httpResponse)))
     const logguerSpy = jest.spyOn(logguerRepositoryStub, 'log')
-    await sut.handle(makeFakeRequest())
+    await sut.handle(mockFakeRequest())
     expect(logguerSpy).toHaveBeenCalledWith('any_error')
   })
 })
