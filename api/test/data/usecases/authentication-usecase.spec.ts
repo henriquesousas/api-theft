@@ -37,7 +37,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('Authentication Use Case', () => {
+describe('AuthenticationUseCase', () => {
   describe('LoadAccountByEmailRepository', () => {
     test('deve chamar LoadAccountByEmailRepository com os valores corretos', async () => {
       const { sut, loadAccountByEmailRepositoryStub } = mockSut()
