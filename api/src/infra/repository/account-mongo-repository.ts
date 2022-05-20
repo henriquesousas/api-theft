@@ -4,6 +4,7 @@ import { LoadAccountByIdRepository } from '../../data/protocols/repository/accou
 import { AccountDto } from '../../domain/dto/account-dto'
 import { Account } from '../../domain/models/account'
 import { MongoHelper } from './helper/mongo-helper'
+import { ObjectID } from 'mongodb'
 
 export class AccountMongoRepositoy implements AddAccountRepositoy, LoadAccountByEmailRepository, LoadAccountByIdRepository {
   async add(dto: AccountDto): Promise<Account> {
@@ -21,7 +22,8 @@ export class AccountMongoRepositoy implements AddAccountRepositoy, LoadAccountBy
 
   async loadById(id: string): Promise<Account> {
     const accountCollection = await MongoHelper.getCollection('accounts')
-    const account = await accountCollection.findOne({ _id: id })
+    const myId = new ObjectID(id)
+    const account = await accountCollection.findOne({ _id: myId })
     return account && MongoHelper.map(account)
   }
 }
