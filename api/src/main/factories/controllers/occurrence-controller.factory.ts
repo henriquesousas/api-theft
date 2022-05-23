@@ -9,6 +9,7 @@ import { ValidationComposite } from '../../../validators/validation-composite'
 import { ValidationRequiredField } from '../../../validators/validation-required-field'
 import { LogguerControllerDecorator } from '../../config/decorator/logguer-controller.decorator'
 
+// TODO: Make factories
 export const makeOccurrenceControllerFactory = (): Controller => {
   const occurrenceMongoRepository = new OccurrenceMongoRepository()
   const loadAccountByIdRepository = new AccountMongoRepositoy()
