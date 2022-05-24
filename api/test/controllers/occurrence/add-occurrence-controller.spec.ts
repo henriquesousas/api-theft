@@ -2,8 +2,8 @@ import { Validation } from '../../../src/controllers/import-protocols'
 import { AddOccurrenceController } from '../../../src/controllers/occurrence/add-occurrence-controller'
 import { AddOccurrence } from '../../../src/domain/usecases/occurrence/add-occurrence'
 import { badRequest, serverError } from '../../../src/helpers/http/http'
-import { mockAddOccurrence } from '../../data/usecases/mocks/mock-add-occurrence-usecase'
-import { mockAddOccurrenceRequest } from '../../http/mock-add-occurrence-request'
+import { mockAddOccurrence } from '../../data/usecases/mocks/mock-occurrence-usecase'
+import { mockAddOccurrenceRequest } from '../../http/mock-occurrence-request'
 import { mockValidation } from '../../validators/mocks'
 
 type SutTypes = {

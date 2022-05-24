@@ -4,7 +4,7 @@ import { serverError } from '../../../../src/helpers/http/http'
 import { LogguerControllerDecorator } from '../../../../src/main/config/decorator/logguer-controller.decorator'
 import { mockLogguerRepository } from '../../../infra/repository/mocks'
 import { mockBaseController } from '../../../controllers/mocks/mock-controller'
-import { mockFakeRequest } from '../../../http'
+import { mockAccountRequest } from '../../../http'
 
 type SutType = {
   sut: LogguerControllerDecorator
@@ -27,14 +27,14 @@ describe('LogguerController', () => {
   test('deve chamar o Controller com o valor correto', async () => {
     const { sut, controllerStub } = mockSut()
     const controllerSpy = jest.spyOn(controllerStub, 'handle')
-    await sut.handle(mockFakeRequest())
-    expect(controllerSpy).toHaveBeenCalledWith(mockFakeRequest())
+    await sut.handle(mockAccountRequest())
+    expect(controllerSpy).toHaveBeenCalledWith(mockAccountRequest())
   })
 
   test('deve retornar serverError quando o controller falhar', async () => {
     const { sut, controllerStub } = mockSut()
     jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(new Promise(resolve => resolve(serverError(new Error()))))
-    const httpResponse = await sut.handle(mockFakeRequest())
+    const httpResponse = await sut.handle(mockAccountRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
@@ -52,7 +52,7 @@ describe('LogguerController', () => {
     jest.spyOn(controllerStub, 'handle')
       .mockReturnValueOnce(new Promise(resolve => resolve(httpResponse)))
     const logguerSpy = jest.spyOn(logguerRepositoryStub, 'log')
-    await sut.handle(mockFakeRequest())
+    await sut.handle(mockAccountRequest())
     expect(logguerSpy).toHaveBeenCalledWith('any_error')
   })
 })

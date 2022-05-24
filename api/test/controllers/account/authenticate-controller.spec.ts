@@ -5,7 +5,7 @@ import { serverError } from '../../../src/helpers/http/http'
 import { ValidationComposite } from '../../../src/validators/validation-composite'
 import { ValidationRequiredField } from '../../../src/validators/validation-required-field'
 import { mockAuthenticateUseCase } from '../../data/usecases/mocks'
-import { mockFakeRequestWithoutName } from '../../http/mock-account-request'
+import { mockAccountRequestWithoutName } from '../../http/mock-account-request'
 
 type SutTypes = {
   sut: AuthenticationController
@@ -30,17 +30,17 @@ describe('AuthenticationController', () => {
   test('deve chamar o Validate com os valores correto', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
-    await sut.handle(mockFakeRequestWithoutName())
-    expect(validateSpy).toHaveBeenCalledWith(mockFakeRequestWithoutName().body)
+    await sut.handle(mockAccountRequestWithoutName())
+    expect(validateSpy).toHaveBeenCalledWith(mockAccountRequestWithoutName().body)
   })
 
   test('deve chamar o AuthenticateUseCase com os valores correto', async () => {
     const { sut, loginUseCaseStub } = mockSut()
     const useCaseSpy = jest.spyOn(loginUseCaseStub, 'login')
-    await sut.handle(mockFakeRequestWithoutName())
+    await sut.handle(mockAccountRequestWithoutName())
     expect(useCaseSpy).toHaveBeenCalledWith(
-      mockFakeRequestWithoutName().body.email,
-      mockFakeRequestWithoutName().body.password)
+      mockAccountRequestWithoutName().body.email,
+      mockAccountRequestWithoutName().body.password)
   })
 
   test('deve lancar uma error se o AuthenticateUseCase throws', async () => {
@@ -48,7 +48,7 @@ describe('AuthenticationController', () => {
     jest.spyOn(loginUseCaseStub, 'login').mockImplementationOnce(() => {
       throw new Error()
     })
-    const httpResponse = await sut.handle(mockFakeRequestWithoutName())
+    const httpResponse = await sut.handle(mockAccountRequestWithoutName())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
