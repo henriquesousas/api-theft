@@ -1,3 +1,4 @@
+import { NotFoundError } from '../erros/not-found-error'
 import { ServerError } from '../erros/server-error'
 import { UnauthorizedError } from '../erros/unauthorized-error'
 import { HttpResponse } from './http-response'
@@ -27,6 +28,13 @@ export const unauthorized = (): HttpResponse => {
   return {
     statusCode: 401,
     body: new UnauthorizedError()
+  }
+}
+
+export const notFound = (): HttpResponse => {
+  return {
+    statusCode: 404,
+    body: new NotFoundError()
   }
 }
 
