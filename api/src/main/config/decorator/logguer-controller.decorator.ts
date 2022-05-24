@@ -12,7 +12,6 @@ export class LogguerControllerDecorator implements Controller {
     if (httpResponse.statusCode === 500) {
       await this.logguerRepository.log(httpResponse.body.stack)
     }
-
     return httpResponse
   }
 }

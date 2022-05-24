@@ -1,35 +1,26 @@
 
-import { badRequest, forbidden, serverError, sucess } from '../../helpers/http/http'
-import { EmailInUseError } from '../../helpers/erros/email-in-user-error'
+import { badRequest, sucess } from '../../helpers/http/http'
 import { AddAccount, HttpRequest, HttpResponse, Validation, Controller } from '../import-protocols'
+import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
 
 export class SignupController implements Controller {
-  constructor (
+  constructor(
     private readonly validation: Validation,
-    private readonly addAccounseUseCase: AddAccount
+    private readonly addAccountUseCase: AddAccount
   ) { }
 
-  async handle (request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(request.body)
-      if (error) {
-        return badRequest(error)
-      }
+      this.validation.validate(request.body)
       const { name, email, password } = request.body
-      const account = await this.addAccounseUseCase.add({
+      const account = await this.addAccountUseCase.add({
         name,
         email,
         password
       })
-
-      if (!account) {
-        return forbidden(new EmailInUseError())
-      }
-
       return sucess(account)
     } catch (error) {
-      // console.log(error)
-      return serverError(error)
+      return new ErrorFactory().get(error)
     }
   }
 }

@@ -1,3 +1,4 @@
+import { EmailInUseError } from '../../../helpers/erros/email-in-user-error'
 import { AddAccount, Account, AccountDto } from '../import-domain'
 import { LoadAccountByEmailRepository, AddAccountRepositoy, Hasher } from '../import-protocols'
 
@@ -8,14 +9,13 @@ export class AddAccountUseCase implements AddAccount {
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) { }
 
-  async add(dto: AccountDto): Promise<Account | null> {
+  async add(dto: AccountDto): Promise<Account> {
     const account = await this.loadAccountByEmailRepository.loadByEmail(dto.email)
     if (account) {
-      return null
+      throw new EmailInUseError()
     }
     const hashedPassword = await this.hasher.hash(dto.password)
     const accountDtoWithHashedPassword = Object.assign(dto, { password: hashedPassword })
-    const newAccount = await this.addAccountRepository.add(accountDtoWithHashedPassword)
-    return newAccount
+    return await this.addAccountRepository.add(accountDtoWithHashedPassword)
   }
 }

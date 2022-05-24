@@ -8,11 +8,10 @@ export class ValidationEmailField implements Validation {
     private readonly emailValidator: EmailValidator
   ) {}
 
-  validate (input: any): Error | null {
+  validate (input: any): void {
     const isValid = this.emailValidator.isValid(input[this.fieldName])
     if (!isValid) {
-      return new InvalidParamError(this.fieldName)
+      throw new InvalidParamError(this.fieldName)
     }
-    return null
   }
 }
