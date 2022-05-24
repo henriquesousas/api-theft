@@ -5,6 +5,8 @@ import { AddAccountUseCase } from '../../../src/data/usecases/account/add-accoun
 import { BCrypter } from '../../../src/infra/criptography/bcrypter'
 import { mockAddAccountRepositoryStub, mockLoadAccountByEmailRepository } from '../../infra/repository/mocks'
 import { mockAccountDto } from '../../domain'
+import { mockAccountModel } from '../models/mock-account'
+import { EmailInUseError } from '../../../src/helpers/erros/email-in-user-error'
 
 type SutTypes = {
   sut: AddAccountUseCase
@@ -45,17 +47,11 @@ describe('AddAccountUseCase', () => {
       await expect(promise).rejects.toThrow()
     })
 
-    test('deve retornar null ao cadastrar uma conta com email existente', async () => {
-      const accountModel = {
-        id: 'any_id',
-        name: 'any_name',
-        email: 'any_email',
-        password: 'any_password'
-      }
+    test('deve lançar um error (EmailInUseError) se LoadAccountByEmailRepository tentar cadastrar uma conta com email existente', async () => {
       const { sut, loadByEmailRepositoryStub } = mockSut()
-      jest.spyOn(loadByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(Promise.resolve(accountModel))
-      const httpResponse = await sut.add(mockAccountDto())
-      expect(httpResponse).toBeNull()
+      jest.spyOn(loadByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(Promise.resolve(mockAccountModel()))
+      const promise = sut.add(mockAccountDto())
+      await expect(promise).rejects.toThrowError(new EmailInUseError())
     })
   })
 
