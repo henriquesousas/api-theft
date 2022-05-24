@@ -1,6 +1,6 @@
 import { HttpRequest } from '../../src/controllers/import-protocols'
 
-export const mockFakeRequest = (): HttpRequest => {
+export const mockAccountRequest = (): HttpRequest => {
   const httpRequest = {
     body: {
       name: 'any_nam',
@@ -11,7 +11,7 @@ export const mockFakeRequest = (): HttpRequest => {
   return httpRequest
 }
 
-export const mockFakeRequestWithoutName = (): HttpRequest => {
+export const mockAccountRequestWithoutName = (): HttpRequest => {
   return {
     body: {
       email: 'any_email',
