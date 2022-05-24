@@ -1,4 +1,4 @@
-import { SignupController } from '../../../src/controllers/account/signup-controller'
+import { CreateAccountController } from '../../../src/controllers/account/create-account-controller'
 import { serverError } from '../../../src/helpers/http/http'
 import { AddAccount, Validation } from '../../../src/controllers/import-protocols'
 import { mockAddAccountUseCase } from '../../data/usecases/mocks'
@@ -6,7 +6,7 @@ import { mockValidation } from '../../validators/mocks'
 import { mockAccountRequest } from '../../http'
 
 type SutTypes = {
-  sut: SignupController
+  sut: CreateAccountController
   validationStub: Validation
   addAccountUseCaseStub: AddAccount
 }
@@ -14,7 +14,7 @@ type SutTypes = {
 const mockSut = (): SutTypes => {
   const validationStub = mockValidation()
   const addAccountUseCaseStub = mockAddAccountUseCase()
-  const sut = new SignupController(validationStub, addAccountUseCaseStub)
+  const sut = new CreateAccountController(validationStub, addAccountUseCaseStub)
   return {
     sut,
     validationStub,

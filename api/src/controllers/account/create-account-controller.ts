@@ -1,9 +1,9 @@
 
-import { badRequest, sucess } from '../../helpers/http/http'
+import { sucess } from '../../helpers/http/http'
 import { AddAccount, HttpRequest, HttpResponse, Validation, Controller } from '../import-protocols'
 import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
 
-export class SignupController implements Controller {
+export class CreateAccountController implements Controller {
   constructor(
     private readonly validation: Validation,
     private readonly addAccountUseCase: AddAccount
