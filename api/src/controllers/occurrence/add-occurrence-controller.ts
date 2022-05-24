@@ -2,7 +2,7 @@ import { Controller, HttpRequest, HttpResponse, Validation } from '../import-pro
 import { AddOccurrence } from '../../domain/usecases/occurrence/add-occurrence'
 import { badRequest, serverError, sucess } from '../../helpers/http/http'
 
-export class OccurrenceController implements Controller {
+export class AddOccurrenceController implements Controller {
   constructor(
     private readonly addOccurrenceUseCase: AddOccurrence,
     private readonly validation: Validation) { }

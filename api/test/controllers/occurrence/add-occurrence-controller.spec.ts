@@ -1,5 +1,5 @@
 import { Validation } from '../../../src/controllers/import-protocols'
-import { OccurrenceController } from '../../../src/controllers/occurrence/occurrence-controller'
+import { AddOccurrenceController } from '../../../src/controllers/occurrence/add-occurrence-controller'
 import { AddOccurrence } from '../../../src/domain/usecases/occurrence/add-occurrence'
 import { badRequest, serverError } from '../../../src/helpers/http/http'
 import { mockAddOccurrence } from '../../data/usecases/mocks/mock-add-occurrence-usecase'
@@ -7,7 +7,7 @@ import { mockAddOccurrenceRequest } from '../../http/mock-add-occurrence-request
 import { mockValidation } from '../../validators/mocks'
 
 type SutTypes = {
-  sut: OccurrenceController
+  sut: AddOccurrenceController
   addOccurrenceUseCaseStub: AddOccurrence
   validationStub: Validation
 }
@@ -15,7 +15,7 @@ type SutTypes = {
 const mockSut = (): SutTypes => {
   const addOccurrenceUseCaseStub = mockAddOccurrence()
   const validationStub = mockValidation()
-  const sut = new OccurrenceController(addOccurrenceUseCaseStub, validationStub)
+  const sut = new AddOccurrenceController(addOccurrenceUseCaseStub, validationStub)
   return {
     sut,
     addOccurrenceUseCaseStub,
