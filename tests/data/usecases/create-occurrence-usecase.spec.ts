@@ -1,13 +1,12 @@
 import { LoadAccountByIdRepository } from '../../../src/data/protocols/repository/account/load-account-by-id-repository'
 import { AddOccurrenceRepositoy } from '../../../src/data/protocols/repository/ocurrence/add-occurrence-repository'
-import { AddOccurrenceUsecase } from '../../../src/data/usecases/occurrence/add-ocurrence-usecase'
-import { UnauthorizedError } from '../../../src/helpers/erros/unauthorized-error'
+import { CreateOccurrenceUsecase } from '../../../src/data/usecases/occurrence/create-ocurrence-usecase'
 import { mockOccurrenceDto } from '../../domain/dto/mock-occurrence-dto'
 import { mockLoadAccountByIdRepository } from '../../infra/repository/mocks'
 import { mockAddOccurrenceRepository } from '../../infra/repository/mocks/mock-add-occurrence-repository'
 
 type SutTypes = {
-  sut: AddOccurrenceUsecase
+  sut: CreateOccurrenceUsecase
   addOccurrenceRepositoyStub: AddOccurrenceRepositoy
   loadAccountByIdRepositoryStub: LoadAccountByIdRepository
 }
@@ -15,7 +14,7 @@ type SutTypes = {
 const mockSut = (): SutTypes => {
   const addOccurrenceRepositoyStub = mockAddOccurrenceRepository()
   const loadAccountByIdRepositoryStub = mockLoadAccountByIdRepository()
-  const sut = new AddOccurrenceUsecase(addOccurrenceRepositoyStub, loadAccountByIdRepositoryStub)
+  const sut = new CreateOccurrenceUsecase(addOccurrenceRepositoyStub, loadAccountByIdRepositoryStub)
   return {
     sut,
     addOccurrenceRepositoyStub,
@@ -23,9 +22,9 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('AddOccurrenceUseCase', () => {
+describe('CreateOccurrenceUsecase', () => {
   describe('AddOccurrenceRepositoy', () => {
-    test('deve chamar AddOccurrenceRepositoy com os valores corretos', async () => {
+    test('Deve chamar AddOccurrenceRepositoy com os valores corretos', async () => {
       const { sut, addOccurrenceRepositoyStub } = mockSut()
       const addSpy = jest.spyOn(addOccurrenceRepositoyStub, 'add')
       const dto = mockOccurrenceDto()
@@ -33,7 +32,7 @@ describe('AddOccurrenceUseCase', () => {
       expect(addSpy).toHaveBeenCalledWith(dto)
     })
 
-    test('deve lançar uma exception se o AddOccurrenceRepositoy throws', async () => {
+    test('Deve lançar uma exception se o AddOccurrenceRepositoy throws', async () => {
       const { sut, addOccurrenceRepositoyStub } = mockSut()
       jest.spyOn(addOccurrenceRepositoyStub, 'add').mockImplementationOnce(async () => await Promise.reject(new Error()))
       const promise = sut.add(mockOccurrenceDto())

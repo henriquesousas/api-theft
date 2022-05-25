@@ -1,11 +1,11 @@
 import { OccurrenceDto } from '../../../../src/domain/dto/occurrence-dto'
 import { Occurrence } from '../../../../src/domain/models/occurrence'
-import { AddOccurrence } from '../../../../src/domain/usecases/occurrence/add-occurrence'
+import { CreateOccurrence } from '../../../../src/domain/usecases/occurrence/create-occurrence'
 import { LoadOccurrenceById } from '../../../../src/domain/usecases/occurrence/load-occurrence-by-id'
 import { mockOccurrence } from '../../models/mock-occurrence'
 
-export const mockAddOccurrence = (): AddOccurrence => {
-  class AddOccurrenceStub implements AddOccurrence {
+export const mockCreateOccurrence = (): CreateOccurrence => {
+  class AddOccurrenceStub implements CreateOccurrence {
     async add(dto: OccurrenceDto): Promise<void> {
     }
   }

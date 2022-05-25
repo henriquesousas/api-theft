@@ -1,4 +1,3 @@
-
 import { HashComparer } from '../../../src/data/protocols/cryptography/hasher-comparer'
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/account/load-account-by-email-repository'
 import { LoginUseCase } from '../../../src/data/usecases/account/login-usecase'

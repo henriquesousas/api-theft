@@ -8,6 +8,7 @@ export class CreateOccurrenceController implements Controller {
     private readonly createOccurrenceUseCase: CreateOccurrence,
     private readonly validation: Validation) { }
 
+  // TODO: refactor return
   async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
       this.validation.validate(request.body)
@@ -20,7 +21,10 @@ export class CreateOccurrenceController implements Controller {
         product,
         dateOccurrence
       })
-      return sucess('Ocorrência cadastrada com sucesso')
+      return sucess({
+        status: true,
+        message: 'Ocorrência cadastrada com sucesso'
+      })
     } catch (error) {
       return new ErrorFactory().get(error)
     }

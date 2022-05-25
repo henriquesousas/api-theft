@@ -1,7 +1,7 @@
 module.exports = {
   roots: ['<rootDir>/tests'],
   collectCoverageFrom: [
-    '<rootDir>/**/*.ts',
+    '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/main/**' // Não mapear no coverage
   ],
   coverageDirectory: 'coverage',

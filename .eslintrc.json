@@ -1,13 +1,13 @@
 {
-    "extends": "standard-with-typescript",
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
-    "rules": {
-      "@typescript-eslint/method-signature-style": "off",
-      "@typescript-eslint/strict-boolean-expressions": "off",
-      "@typescript-eslint/space-before-function-paren": "off",
-      "no-trailing-spaces": "off",
-      "@typescript-eslint/consistent-type-definitions":"off"
-    }
+  "extends": "standard-with-typescript",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/method-signature-style": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/space-before-function-paren": "off",
+    "no-trailing-spaces": "off",
+    "@typescript-eslint/consistent-type-definitions": "off"
   }
+}
