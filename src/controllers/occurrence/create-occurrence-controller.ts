@@ -1,8 +1,8 @@
 import { Controller, HttpRequest, HttpResponse, Validation } from '../import-protocols'
 import { AddOccurrence } from '../../domain/usecases/occurrence/add-occurrence'
-import { badRequest, serverError, sucess } from '../../helpers/http/http'
+import { serverError, sucess } from '../../helpers/http/http'
 
-export class AddOccurrenceController implements Controller {
+export class CreateOccurrenceController implements Controller {
   constructor(
     private readonly addOccurrenceUseCase: AddOccurrence,
     private readonly validation: Validation) { }
