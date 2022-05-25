@@ -1,9 +1,9 @@
-import { AddOccurrenceUsecase } from '../../../data/usecases/occurrence/add-ocurrence-usecase'
+import { CreateOccurrenceUsecase } from '../../../data/usecases/occurrence/create-ocurrence-usecase'
 import { AccountMongoRepositoy } from '../../../infra/repository/account-mongo-repository'
 import { OccurrenceMongoRepository } from '../../../infra/repository/occurrence-mongo-repository'
 
-export const makeAddOccurrenceUseCaseFactory = (): AddOccurrenceUsecase => {
+export const makeAddOccurrenceUseCaseFactory = (): CreateOccurrenceUsecase => {
   const occurrenceMongoRepository = new OccurrenceMongoRepository()
   const loadAccountByIdRepository = new AccountMongoRepositoy()
-  return new AddOccurrenceUsecase(occurrenceMongoRepository, loadAccountByIdRepository)
+  return new CreateOccurrenceUsecase(occurrenceMongoRepository, loadAccountByIdRepository)
 }

@@ -1,10 +1,10 @@
 import { OccurrenceDto } from '../../../domain/dto/occurrence-dto'
-import { AddOccurrence } from '../../../domain/usecases/occurrence/add-occurrence'
+import { CreateOccurrence } from '../../../domain/usecases/occurrence/create-occurrence'
 import { UnauthorizedError } from '../../../helpers/erros/unauthorized-error'
 import { LoadAccountByIdRepository } from '../../protocols/repository/account/load-account-by-id-repository'
 import { AddOccurrenceRepositoy } from '../../protocols/repository/ocurrence/add-occurrence-repository'
 
-export class AddOccurrenceUsecase implements AddOccurrence {
+export class CreateOccurrenceUsecase implements CreateOccurrence {
   constructor(
     private readonly addOccurrenceRepository: AddOccurrenceRepositoy,
     private readonly loadAccountByIdRepository: LoadAccountByIdRepository) { }

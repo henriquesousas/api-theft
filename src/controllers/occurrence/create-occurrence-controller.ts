@@ -1,20 +1,18 @@
 import { Controller, HttpRequest, HttpResponse, Validation } from '../import-protocols'
-import { AddOccurrence } from '../../domain/usecases/occurrence/add-occurrence'
-import { serverError, sucess } from '../../helpers/http/http'
+import { CreateOccurrence } from '../../domain/usecases/occurrence/create-occurrence'
+import { sucess } from '../../helpers/http/http'
+import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
 
 export class CreateOccurrenceController implements Controller {
   constructor(
-    private readonly addOccurrenceUseCase: AddOccurrence,
+    private readonly createOccurrenceUseCase: CreateOccurrence,
     private readonly validation: Validation) { }
 
   async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
       this.validation.validate(request.body)
-      // if (error) {
-      //   return badRequest(error)
-      // }
       const { userId, title, description, address, product, dateOccurrence } = request.body
-      await this.addOccurrenceUseCase.add({
+      await this.createOccurrenceUseCase.add({
         userId,
         title,
         description,
@@ -24,7 +22,7 @@ export class CreateOccurrenceController implements Controller {
       })
       return sucess('Ocorrência cadastrada com sucesso')
     } catch (error) {
-      return serverError(error)
+      return new ErrorFactory().get(error)
     }
   }
 }
