@@ -5,6 +5,7 @@ import { InvalidParamError } from '../invalid-param-error'
 import { MissingParamError } from '../missing-param-error'
 import { NotFoundError } from '../not-found-error'
 
+// TODO: Refactor
 export class ErrorFactory {
   get(error: Error): HttpResponse {
     if (error instanceof NotFoundError) {

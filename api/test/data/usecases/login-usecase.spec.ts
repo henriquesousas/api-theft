@@ -1,9 +1,10 @@
 
 import { HashComparer } from '../../../src/data/protocols/cryptography/hasher-comparer'
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/account/load-account-by-email-repository'
-import { AuthenticationUseCase } from '../../../src/data/usecases/account/authentication-usecase'
+import { LoginUseCase } from '../../../src/data/usecases/account/login-usecase'
 import { Account } from '../../../src/domain/models/account'
 import { Authentication } from '../../../src/domain/usecases/account/authentication'
+import { UnauthorizedError } from '../../../src/helpers/erros/unauthorized-error'
 import { mockHasherComparer } from '../../infra/criptography/mocks'
 
 type SutTypes = {
@@ -29,7 +30,7 @@ const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 const mockSut = (): SutTypes => {
   const loadAccountByEmailRepositoryStub = mockLoadAccountByEmailRepository()
   const hasherComparerStub = mockHasherComparer()
-  const sut = new AuthenticationUseCase(loadAccountByEmailRepositoryStub, hasherComparerStub)
+  const sut = new LoginUseCase(loadAccountByEmailRepositoryStub, hasherComparerStub)
   return {
     sut,
     loadAccountByEmailRepositoryStub,
@@ -53,11 +54,11 @@ describe('AuthenticationUseCase', () => {
       await expect(promise).rejects.toThrow()
     })
 
-    test('deve retornar null se o LoadAccountByEmailRepository não encontrar uma conta', async () => {
+    test('deve retornar UnauthorizedError se o LoadAccountByEmailRepository não encontrar uma conta', async () => {
       const { sut, loadAccountByEmailRepositoryStub } = mockSut()
       jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(new Promise(resolve => resolve(null)))
-      const account = await sut.login('any_email@gmail.com', '123')
-      expect(account).toBeNull()
+      const promise = sut.login('any_email@gmail.com', '123')
+      await expect(promise).rejects.toThrowError(new UnauthorizedError())
     })
   })
 
@@ -78,11 +79,11 @@ describe('AuthenticationUseCase', () => {
       expect(hashComparerSpy).toHaveBeenCalledWith('any_password', 'hashed_password')
     })
 
-    test('deve retornar null se o HashComparer falhar', async () => {
+    test('deve retornar UnauthorizedError se o HashComparer falhar', async () => {
       const { sut, hasherComparerStub } = mockSut()
       jest.spyOn(hasherComparerStub, 'comparer').mockReturnValueOnce(new Promise(resolve => resolve(false)))
-      const account = await sut.login('any_email', 'any_password')
-      expect(account).toBeNull()
+      const promise = sut.login('any_email', 'any_password')
+      await expect(promise).rejects.toThrowError(new UnauthorizedError())
     })
   })
 })
