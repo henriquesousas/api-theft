@@ -20,7 +20,7 @@ describe('AddAccountRepository', () => {
 
   test('deve criar uma conta com sucesso', async () => {
     const sut = new AccountMongoRepositoy()
-    const account = await sut.add(mockAccountDto())
+    const account = await sut.create(mockAccountDto())
     expect(account).toBeTruthy()
     expect(account.id).toBeTruthy()
     expect(account.name).toBe('any_name')

@@ -26,7 +26,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('AuthenticationController', () => {
+describe('LoginController', () => {
   test('deve chamar o Validate com os valores correto', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')

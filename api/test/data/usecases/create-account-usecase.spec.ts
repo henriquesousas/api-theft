@@ -1,7 +1,7 @@
 import { Hasher } from '../../../src/data/protocols/cryptography/hasher'
-import { AddAccountRepositoy } from '../../../src/data/protocols/repository/account/add-account-repository'
+import { CreateAccountRepositoy } from '../../../src/data/protocols/repository/account/create-account-repository'
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/account/load-account-by-email-repository'
-import { AddAccountUseCase } from '../../../src/data/usecases/account/add-account-usecase'
+import { CreateAccountUseCase } from '../../../src/data/usecases/account/create-account-usecase'
 import { BCrypter } from '../../../src/infra/criptography/bcrypter'
 import { mockAddAccountRepositoryStub, mockLoadAccountByEmailRepository } from '../../infra/repository/mocks'
 import { mockAccountDto } from '../../domain'
@@ -9,8 +9,8 @@ import { mockAccountModel } from '../models/mock-account'
 import { EmailInUseError } from '../../../src/helpers/erros/email-in-user-error'
 
 type SutTypes = {
-  sut: AddAccountUseCase
-  addAccountRepositoryStub: AddAccountRepositoy
+  sut: CreateAccountUseCase
+  addAccountRepositoryStub: CreateAccountRepositoy
   loadByEmailRepositoryStub: LoadAccountByEmailRepository
   hasherStub: Hasher
 }
@@ -20,7 +20,7 @@ const mockSut = (): SutTypes => {
   const hasherStub = new BCrypter(salt)
   const addAccountRepositoryStub = mockAddAccountRepositoryStub()
   const loadByEmailRepositoryStub = mockLoadAccountByEmailRepository()
-  const sut = new AddAccountUseCase(hasherStub, addAccountRepositoryStub, loadByEmailRepositoryStub)
+  const sut = new CreateAccountUseCase(hasherStub, addAccountRepositoryStub, loadByEmailRepositoryStub)
   return {
     sut,
     addAccountRepositoryStub,
@@ -29,13 +29,13 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('AddAccountUseCase', () => {
+describe('CreateAccountUseCase', () => {
   describe('LoadAccountByEmailRepository', () => {
     test('deve chamar o LoadAccountByEmailRepository com o valor correto', async () => {
       const { sut, loadByEmailRepositoryStub } = mockSut()
       const loadByEmailSpy = jest.spyOn(loadByEmailRepositoryStub, 'loadByEmail')
       const fakeDto = mockAccountDto()
-      await sut.add(fakeDto)
+      await sut.create(fakeDto)
       expect(loadByEmailSpy).toHaveBeenCalledWith(fakeDto.email)
     })
 
@@ -43,14 +43,14 @@ describe('AddAccountUseCase', () => {
       const { sut, loadByEmailRepositoryStub } = mockSut()
       jest.spyOn(loadByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
       const fakeDto = mockAccountDto()
-      const promise = sut.add(fakeDto)
+      const promise = sut.create(fakeDto)
       await expect(promise).rejects.toThrow()
     })
 
     test('deve lançar um error (EmailInUseError) se LoadAccountByEmailRepository tentar cadastrar uma conta com email existente', async () => {
       const { sut, loadByEmailRepositoryStub } = mockSut()
       jest.spyOn(loadByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(Promise.resolve(mockAccountModel()))
-      const promise = sut.add(mockAccountDto())
+      const promise = sut.create(mockAccountDto())
       await expect(promise).rejects.toThrowError(new EmailInUseError())
     })
   })
@@ -60,14 +60,14 @@ describe('AddAccountUseCase', () => {
       const { sut, hasherStub } = mockSut()
       const hasherSpy = jest.spyOn(hasherStub, 'hash')
       const accountDto = mockAccountDto()
-      await sut.add(accountDto)
+      await sut.create(accountDto)
       expect(hasherSpy).toHaveBeenCalledWith('any_password')
     })
 
     test('deve lançar uma exception se Hasher throws', async () => {
       const { sut, hasherStub } = mockSut()
       jest.spyOn(hasherStub, 'hash').mockImplementationOnce(async () => await Promise.reject(new Error()))
-      const promise = sut.add(mockAccountDto())
+      const promise = sut.create(mockAccountDto())
       await expect(promise).rejects.toThrow()
     })
   })
