@@ -2,17 +2,22 @@ import { MissingParamError } from '../../src/helpers/erros/missing-param-error'
 import { ValidationRequiredField } from '../../src/validators/validation-required-field'
 
 describe('ValidationRequiredField', () => {
-  test('deve retornar MissingParamError case a validação falhe', () => {
+  // Refactor
+  test('Deve throws MissingParamError se o validator falhar', () => {
     const httpRequest = {
       email: 'any_email',
       password: 'any_password'
     }
     const sut = new ValidationRequiredField('any_field')
-    const httpResponse = sut.validate(httpRequest)
-    expect(httpResponse).toEqual(new MissingParamError('any_field'))
+    try {
+      sut.validate(httpRequest)
+      expect(true).toEqual(false)
+    } catch (error) {
+      expect(error).toBeInstanceOf(MissingParamError)
+    }
   })
 
-  test('deve retornar null case a validação passe', () => {
+  test('Não deve throws se o validator não falhar', () => {
     const httpRequest = {
       name: 'any_name',
       email: 'any_email',

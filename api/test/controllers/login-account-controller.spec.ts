@@ -1,11 +1,11 @@
-import { Validation } from '../../../src/controllers/import-protocols'
-import { LoginController } from '../../../src/controllers/account/login-account-controller'
-import { Authentication } from '../../../src/domain/usecases/account/authentication'
-import { serverError } from '../../../src/helpers/http/http'
-import { ValidationComposite } from '../../../src/validators/validation-composite'
-import { ValidationRequiredField } from '../../../src/validators/validation-required-field'
-import { mockAuthenticateUseCase } from '../../data/usecases/mocks'
-import { mockAccountRequestWithoutName } from '../../http/mock-account-request'
+import { Validation } from '../../src/controllers/import-protocols'
+import { LoginController } from '../../src/controllers/account/login-account-controller'
+import { Authentication } from '../../src/domain/usecases/account/authentication'
+import { serverError } from '../../src/helpers/http/http'
+import { ValidationComposite } from '../../src/validators/validation-composite'
+import { ValidationRequiredField } from '../../src/validators/validation-required-field'
+import { mockAccountRequestWithoutName } from '../http/mock-account-request'
+import { mockLoginUseCase } from '../data/usecases/mocks/mock-account-usecase'
 
 type SutTypes = {
   sut: LoginController
@@ -17,7 +17,7 @@ const mockSut = (): SutTypes => {
   const validationStub = new ValidationComposite([
     new ValidationRequiredField('email')]
   )
-  const loginUseCaseStub = mockAuthenticateUseCase()
+  const loginUseCaseStub = mockLoginUseCase()
   const sut = new LoginController(validationStub, loginUseCaseStub)
   return {
     sut,

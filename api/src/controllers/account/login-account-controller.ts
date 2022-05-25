@@ -5,14 +5,14 @@ import { Validation, HttpRequest, HttpResponse, Controller, Authentication } fro
 export class LoginController implements Controller {
   constructor(
     private readonly validation: Validation,
-    private readonly useCase: Authentication
+    private readonly loginUseCase: Authentication
   ) { }
 
   async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
       this.validation.validate(request.body)
       const { email, password } = request.body
-      const account = await this.useCase.login(email, password)
+      const account = await this.loginUseCase.login(email, password)
       return sucess(account)
     } catch (error) {
       return new ErrorFactory().get(error)

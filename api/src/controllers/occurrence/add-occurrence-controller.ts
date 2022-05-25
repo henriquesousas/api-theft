@@ -9,10 +9,10 @@ export class AddOccurrenceController implements Controller {
 
   async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(request.body)
-      if (error) {
-        return badRequest(error)
-      }
+      this.validation.validate(request.body)
+      // if (error) {
+      //   return badRequest(error)
+      // }
       const { userId, title, description, address, product, dateOccurrence } = request.body
       await this.addOccurrenceUseCase.add({
         userId,
