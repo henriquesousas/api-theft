@@ -1,5 +1,6 @@
+import { Authentication } from '../../../domain/usecases/account/authentication'
 import { UnauthorizedError } from '../../../helpers/erros/unauthorized-error'
-import { Account, Authentication } from '../import-domain'
+import { Account } from '../import-domain'
 import { LoadAccountByEmailRepository, HashComparer } from '../import-protocols'
 
 export class LoginUseCase implements Authentication {

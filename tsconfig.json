@@ -7,7 +7,7 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "allowJs": true,
-    "rootDirs": ["api/src", "api/test"],
+    "rootDirs": ["src", "tests"],
   },
-  "exclude": ["api/test"]
+  "exclude": ["tests"]
 }
