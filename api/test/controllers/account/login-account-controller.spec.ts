@@ -1,5 +1,5 @@
 import { Validation } from '../../../src/controllers/import-protocols'
-import { AuthenticationController } from '../../../src/controllers/account/authentication-controller'
+import { AuthenticationController } from '../../../src/controllers/account/login-account-controller'
 import { Authentication } from '../../../src/domain/usecases/account/authentication'
 import { serverError } from '../../../src/helpers/http/http'
 import { ValidationComposite } from '../../../src/validators/validation-composite'
