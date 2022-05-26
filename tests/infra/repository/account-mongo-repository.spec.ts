@@ -5,6 +5,7 @@ import env from '../../../src/main/config/env'
 
 import { Collection } from 'mongodb'
 import { Account } from '../../../src/domain/models/account'
+import { mockAccountModel } from '../../domain/models/account'
 
 
 let accountCollection: Collection
@@ -37,12 +38,7 @@ describe('AccountMongoRepository', () => {
 
   describe('loadByEmail', () => {
     test('deve retornar uma conta com sucesso', async () => {
-      const accountFake: Account = {
-        id: 'any_id',
-        name: 'any_name',
-        email: 'any_email',
-        password: 'any_password',
-      }
+      const accountFake = mockAccountModel()
       accountCollection.insertOne(accountFake)
       const sut = new AccountMongoRepositoy()
       const account = await sut.loadByEmail(accountFake.email)
@@ -62,12 +58,7 @@ describe('AccountMongoRepository', () => {
 
   describe('loadById', () => {
     test('deve retornar uma conta com sucesso', async () => {
-      const accountFake: Account = {
-        id: 'any_id',
-        name: 'any_name',
-        email: 'any_email',
-        password: 'any_password',
-      }
+      const accountFake = mockAccountModel()
       const result = await accountCollection.insertOne(accountFake)
       const sut = new AccountMongoRepositoy()
       const account = await sut.loadById(result.ops[0]._id)
@@ -81,12 +72,7 @@ describe('AccountMongoRepository', () => {
 
   describe('updateAccessToken', () => {
     test('deve retornar uma conta com sucesso', async () => {
-      const accountFake: Account = {
-        id: 'any_id',
-        name: 'any_name',
-        email: 'any_email',
-        password: 'any_password',
-      }
+      const accountFake = mockAccountModel()
       const result = await accountCollection.insertOne(accountFake)
       const sut = new AccountMongoRepositoy()
       await sut.updateAccessToken(result.ops[0]._id, 'any_token')
