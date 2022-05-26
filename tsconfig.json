@@ -7,8 +7,9 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "allowJs": true,
-    "baseUrl": "src",
-    "rootDirs": ["src", "tests"]
+    "rootDirs": ["src", "tests"],
+    "baseUrl": "src"
   },
-  "exclude": ["tests"]
+  "include": ["src", "tests"],
+  "exclude": []
 }
