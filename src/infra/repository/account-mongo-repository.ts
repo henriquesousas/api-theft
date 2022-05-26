@@ -5,8 +5,9 @@ import { AccountDto } from '../../domain/dto/account-dto'
 import { Account } from '../../domain/models/account'
 import { MongoHelper } from './helper/mongo-helper'
 import { ObjectID } from 'mongodb'
+import { UpdateAccessTokenRepository } from 'data/protocols/repository/account/update-access-token-repository'
 
-export class AccountMongoRepositoy implements CreateAccountRepositoy, LoadAccountByEmailRepository, LoadAccountByIdRepository {
+export class AccountMongoRepositoy implements CreateAccountRepositoy, LoadAccountByEmailRepository, LoadAccountByIdRepository, UpdateAccessTokenRepository {
   async create(dto: AccountDto): Promise<Account> {
     const accountCollection = await MongoHelper.getCollection('accounts')
     const result = await accountCollection.insertOne(dto)
@@ -24,5 +25,16 @@ export class AccountMongoRepositoy implements CreateAccountRepositoy, LoadAccoun
     const accountCollection = await MongoHelper.getCollection('accounts')
     const account = await accountCollection.findOne({ _id: new ObjectID(id) })
     return account && MongoHelper.map(account)
+  }
+
+  async updateAccessToken(id: string, token: string): Promise<void> {
+    const accountCollection = await MongoHelper.getCollection('accounts')
+    accountCollection.updateOne({
+      _id: id
+    }, {
+      $set: {
+        accessToken: token
+      }
+    })
   }
 }
