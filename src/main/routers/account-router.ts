@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
+import { makeCreateAccountControllerFactory } from 'main/factories/controllers/create-account-controller-factory'
 import { expressRouterAdapter } from '../adapters/express-router-adapter'
-import { makeSignupControllerFactory } from '../config/factories/controllers/signup-controller-factory'
-import { makeLoginControllerFactory } from '../factories/controllers/authentication-controller.factory'
+import { makeLoginControllerFactory } from '../factories/controllers/login-controller.factory'
 
 export default (router: Router): void => {
-  router.use('/signup', expressRouterAdapter(makeSignupControllerFactory()))
+  router.use('/signup', expressRouterAdapter(makeCreateAccountControllerFactory()))
   router.use('/auth', expressRouterAdapter(makeLoginControllerFactory()))
 }

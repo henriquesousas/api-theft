@@ -5,7 +5,7 @@ import { makeSignupValidatorFactory } from '../validators/signup-validator-facto
 import { LogguerControllerDecorator } from '../../config/decorator/logguer-controller.decorator'
 import { LogguerMongoRepository } from '../../../infra/repository/logguer-mongo-repository'
 
-export const makeSignupControllerFactory = (): Controller => {
+export const makeCreateAccountControllerFactory = (): Controller => {
   const signupController = new CreateAccountController(makeSignupValidatorFactory(), makeAddAccountUseCaseFactory())
   const loguerRepository = new LogguerMongoRepository()
   return new LogguerControllerDecorator(signupController, loguerRepository)
