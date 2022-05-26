@@ -4,7 +4,8 @@ import { Request, Response } from 'express'
 export const expressRouterAdapter = (controller: Controller) => {
   return async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
-      body: req.body
+      body: req.body,
+      params: req.params
     }
     const httpResponse = await controller.handle(httpRequest)
     if (httpResponse.statusCode === 200) {
@@ -13,7 +14,7 @@ export const expressRouterAdapter = (controller: Controller) => {
       res.status(httpResponse.statusCode).json({
         success: false,
         error: {
-          exception: httpResponse.body.name,
+          type: httpResponse.body.name,
           message: httpResponse.body.message
         }
       })
