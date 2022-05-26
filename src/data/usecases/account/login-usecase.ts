@@ -23,8 +23,8 @@ export class LoginUseCase implements Authentication {
     }
     const accessToken = await this.encrypter.encrypt(account.id)
     return {
-      accessToken,
-      account
+      account,
+      accessToken
     }
   }
 }

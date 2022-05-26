@@ -6,7 +6,7 @@
   "scripts": {
     "start": "sucrase-node src/main/server.ts",
     "debug": "node --inspect -r sucrase/register src/main/server.ts",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "jest",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- -c jest-unit-config.js",
