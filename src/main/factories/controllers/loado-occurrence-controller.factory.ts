@@ -1,4 +1,4 @@
-import { LoadOccurrenceController } from 'controllers/occurrence/load-occurrence-controller'
+import { LoadOccurrenceController } from '../../../controllers/occurrence/load-occurrence-controller'
 import { Controller } from '../../../controllers/controller'
 import { LogguerMongoRepository } from '../../../infra/repository/logguer-mongo-repository'
 import { LogguerControllerDecorator } from '../../config/decorator/logguer-controller.decorator'

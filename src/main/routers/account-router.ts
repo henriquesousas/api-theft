@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
-import { makeCreateAccountControllerFactory } from 'main/factories/controllers/create-account-controller-factory'
+import { makeCreateAccountControllerFactory } from '../factories/controllers/create-account-controller-factory'
 import { expressRouterAdapter } from '../adapters/express-router-adapter'
 import { makeLoginControllerFactory } from '../factories/controllers/login-controller.factory'
 

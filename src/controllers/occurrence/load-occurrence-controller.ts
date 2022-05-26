@@ -1,6 +1,7 @@
 
+import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
 import { LoadOccurrenceById } from '../../domain/usecases/occurrence/load-occurrence-by-id'
-import { serverError, sucess } from '../../helpers/http/http'
+import { sucess } from '../../helpers/http/http'
 import { HttpRequest, HttpResponse, Controller } from '../import-protocols'
 
 export class LoadOccurrenceController implements Controller {
@@ -11,7 +12,7 @@ export class LoadOccurrenceController implements Controller {
       const occurrence = await this.loadOccurrenceByIdUseCase.loadById(request.params.occurrenceId)
       return sucess(occurrence)
     } catch (error) {
-      return serverError(error)
+      return new ErrorFactory().get(error)
     }
   }
 }
