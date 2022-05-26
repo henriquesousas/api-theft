@@ -1,6 +1,6 @@
 import { sucess } from '../../helpers/http/http'
 import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
-import { CreateAccount, HttpRequest, HttpResponse, Validation, Controller } from '../import-protocols'
+import { CreateAccount, HttpResponse, Validation, Controller } from '../import-protocols'
 
 export class CreateAccountController implements Controller {
   constructor(
@@ -8,10 +8,10 @@ export class CreateAccountController implements Controller {
     private readonly createAccountUseCase: CreateAccount
   ) { }
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: CreateAccountController.Request): Promise<HttpResponse> {
     try {
-      this.validation.validate(request.body)
-      const { name, email, password } = request.body
+      this.validation.validate(request)
+      const { name, email, password } = request
       const account = await this.createAccountUseCase.create({
         name,
         email,
@@ -21,5 +21,13 @@ export class CreateAccountController implements Controller {
     } catch (error) {
       return new ErrorFactory().get(error)
     }
+  }
+}
+
+export namespace CreateAccountController {
+  export type Request = {
+    name: string
+    email: string
+    password: string
   }
 }

@@ -1,6 +1,6 @@
 import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
 import { sucess } from '../../helpers/http/http'
-import { Validation, HttpRequest, HttpResponse, Controller, Authentication } from '../import-protocols'
+import { Validation, HttpResponse, Authentication, Controller } from '../import-protocols'
 
 export class LoginController implements Controller {
   constructor(
@@ -8,14 +8,21 @@ export class LoginController implements Controller {
     private readonly loginUseCase: Authentication
   ) { }
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: LoginController.Request): Promise<HttpResponse> {
     try {
-      this.validation.validate(request.body)
-      const { email, password } = request.body
+      this.validation.validate(request)
+      const { email, password } = request
       const account = await this.loginUseCase.login(email, password)
       return sucess(account)
     } catch (error) {
       return new ErrorFactory().get(error)
     }
+  }
+}
+
+export namespace LoginController {
+  export type Request = {
+    email: string
+    password: string
   }
 }
