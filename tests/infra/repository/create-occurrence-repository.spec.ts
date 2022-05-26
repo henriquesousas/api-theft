@@ -6,7 +6,7 @@ import { mockOccurrenceDto } from '../../domain/dto/mock-occurrence-dto'
 
 let occurrenceCollection: Collection
 
-describe('AddOccurrenceRepository', () => {
+describe('CreateOccurrenceRepository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(env.mongoUrl)
   })
