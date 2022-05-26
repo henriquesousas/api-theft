@@ -5,7 +5,7 @@ import { LogguerControllerDecorator } from '../../config/decorator/logguer-contr
 import { makeAddOccurrenceUseCaseFactory } from '../usecases/add-occurrence-usecase-factory'
 import { makeAddOccurrenceValidationFactory } from '../validators/add-occurrence-validation-factory'
 
-export const makeOccurrenceControllerFactory = (): Controller => {
+export const makeCreateOccurrenceControllerFactory = (): Controller => {
   const occurrenceController = new CreateOccurrenceController(makeAddOccurrenceUseCaseFactory(), makeAddOccurrenceValidationFactory())
   const loguerRepository = new LogguerMongoRepository()
   return new LogguerControllerDecorator(occurrenceController, loguerRepository)
