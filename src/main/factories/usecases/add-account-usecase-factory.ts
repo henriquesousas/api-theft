@@ -3,7 +3,7 @@ import { CreateAccountUseCase } from '../../../data/usecases/account/create-acco
 import { BCrypter } from '../../../infra/criptography/bcrypter'
 import { AccountMongoRepositoy } from '../../../infra/repository/account-mongo-repository'
 
-export const makeAddAccountUseCaseFactory = (): CreateAccount => {
+export const makeCreateAccounttUseCaseFactory = (): CreateAccount => {
   const salt = 12
   const bcryptHasher = new BCrypter(salt)
   const addAccountRepository = new AccountMongoRepositoy()
