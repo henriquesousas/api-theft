@@ -1,6 +1,7 @@
 import { CreateAccountRepositoy } from '../../../../src/data/protocols/repository/account/create-account-repository'
 import { LoadAccountByEmailRepository } from '../../../../src/data/protocols/repository/account/load-account-by-email-repository'
 import { LoadAccountByIdRepository } from '../../../../src/data/protocols/repository/account/load-account-by-id-repository'
+import { UpdateAccessTokenRepository } from '../../../../src/data/protocols/repository/account/update-access-token-repository'
 import { AccountDto } from '../../../../src/domain/dto/account-dto'
 import { Account } from '../../../../src/domain/models/account'
 
@@ -41,4 +42,13 @@ export const mockLoadAccountByIdRepository = (): LoadAccountByIdRepository => {
     }
   }
   return new LoadAccountByIdRepositoryStub()
+}
+
+export const mockUpdateAccessTokenRepository = (): UpdateAccessTokenRepository => {
+  class UpdateAccessTokenRepositoryStub implements UpdateAccessTokenRepository {
+    async updateAccessToken(id: string, token: string): Promise<void> {
+
+    }
+  }
+  return new UpdateAccessTokenRepositoryStub()
 }

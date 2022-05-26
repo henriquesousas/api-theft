@@ -1,15 +1,20 @@
+import { Encrypter } from '../../../src/data/protocols/cryptography/encrypter'
 import { HashComparer } from '../../../src/data/protocols/cryptography/hasher-comparer'
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/account/load-account-by-email-repository'
+import { UpdateAccessTokenRepository } from '../../../src/data/protocols/repository/account/update-access-token-repository'
 import { LoginUseCase } from '../../../src/data/usecases/account/login-usecase'
 import { Account } from '../../../src/domain/models/account'
 import { Authentication } from '../../../src/domain/usecases/account/authentication'
 import { UnauthorizedError } from '../../../src/helpers/erros/unauthorized-error'
-import { mockHasherComparer } from '../../infra/criptography/mocks'
+import { mockHasherComparer, mockJwtAdapter } from '../../infra/criptography/mocks'
+import { mockUpdateAccessTokenRepository } from '../../infra/repository/mocks/mock-account-repository'
 
 type SutTypes = {
   sut: Authentication
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
-  hasherComparerStub: HashComparer
+  updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
+  hasherComparerStub: HashComparer,
+  jwtAdapterEncrypterStub: Encrypter
 }
 
 const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
@@ -28,12 +33,16 @@ const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 
 const mockSut = (): SutTypes => {
   const loadAccountByEmailRepositoryStub = mockLoadAccountByEmailRepository()
+  const updateAccessTokenRepositoryStub = mockUpdateAccessTokenRepository()
   const hasherComparerStub = mockHasherComparer()
-  const sut = new LoginUseCase(loadAccountByEmailRepositoryStub, hasherComparerStub)
+  const jwtAdapterEncrypterStub = mockJwtAdapter()
+  const sut = new LoginUseCase(loadAccountByEmailRepositoryStub,updateAccessTokenRepositoryStub, hasherComparerStub, jwtAdapterEncrypterStub)
   return {
     sut,
     loadAccountByEmailRepositoryStub,
-    hasherComparerStub
+    updateAccessTokenRepositoryStub,
+    hasherComparerStub,
+    jwtAdapterEncrypterStub
   }
 }
 
