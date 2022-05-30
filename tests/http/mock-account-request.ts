@@ -1,21 +1,18 @@
-import { HttpRequest } from '../../src/controllers/import-protocols'
+import { CreateAccountController } from '../controllers/account/create-account-controller'
+import { LoginController } from '../controllers/account/login-account-controller'
 
-export const mockAccountRequest = (): HttpRequest => {
-  const httpRequest = {
-    body: {
-      name: 'any_nam',
-      email: 'any_email',
-      password: 'any_password'
-    }
+export const mockCreateAccountRequest = (): CreateAccountController.Request => {
+  const request = {
+    name: 'any_name',
+    email: 'any_email',
+    password: 'any_password'
   }
-  return httpRequest
+  return request
 }
 
-export const mockAccountRequestWithoutName = (): HttpRequest => {
+export const mockAuthenticateAccountRequest = (): LoginController.Request => {
   return {
-    body: {
-      email: 'any_email',
-      password: 'any_password'
-    }
+    email: 'any_name',
+    password: 'any_name'
   }
 }

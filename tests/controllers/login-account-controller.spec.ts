@@ -4,8 +4,8 @@ import { Authentication } from '../../src/domain/usecases/account/authentication
 import { serverError } from '../../src/helpers/http/http'
 import { ValidationComposite } from '../../src/validators/validation-composite'
 import { ValidationRequiredField } from '../../src/validators/validation-required-field'
-import { mockAccountRequestWithoutName } from '../http/mock-account-request'
 import { mockLoginUseCase } from '../data/usecases/mocks/mock-account-usecase'
+import { mockAuthenticateAccountRequest } from '../http'
 
 type SutTypes = {
   sut: LoginController
@@ -27,28 +27,32 @@ const mockSut = (): SutTypes => {
 }
 
 describe('LoginController', () => {
-  test('deve chamar o Validate com os valores correto', async () => {
-    const { sut, validationStub } = mockSut()
-    const validateSpy = jest.spyOn(validationStub, 'validate')
-    await sut.handle(mockAccountRequestWithoutName())
-    expect(validateSpy).toHaveBeenCalledWith(mockAccountRequestWithoutName().body)
-  })
-
-  test('deve chamar o AuthenticateUseCase com os valores correto', async () => {
-    const { sut, loginUseCaseStub } = mockSut()
-    const useCaseSpy = jest.spyOn(loginUseCaseStub, 'login')
-    await sut.handle(mockAccountRequestWithoutName())
-    expect(useCaseSpy).toHaveBeenCalledWith(
-      mockAccountRequestWithoutName().body.email,
-      mockAccountRequestWithoutName().body.password)
-  })
-
-  test('deve lancar uma error se o AuthenticateUseCase throws', async () => {
-    const { sut, loginUseCaseStub } = mockSut()
-    jest.spyOn(loginUseCaseStub, 'login').mockImplementationOnce(() => {
-      throw new Error()
+  describe('Validation', () => {
+    test('Deve chamar o Validate com os valores correto', async () => {
+      const { sut, validationStub } = mockSut()
+      const validateSpy = jest.spyOn(validationStub, 'validate')
+      await sut.handle(mockAuthenticateAccountRequest())
+      expect(validateSpy).toHaveBeenCalledWith(mockAuthenticateAccountRequest())
     })
-    const httpResponse = await sut.handle(mockAccountRequestWithoutName())
-    expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  describe('Authentication', () => {
+    test('Deve chamar o LoginUseCase com os valores correto', async () => {
+      const { sut, loginUseCaseStub } = mockSut()
+      const useCaseSpy = jest.spyOn(loginUseCaseStub, 'login')
+      await sut.handle(mockAuthenticateAccountRequest())
+      expect(useCaseSpy).toHaveBeenCalledWith(
+        mockAuthenticateAccountRequest().email,
+        mockAuthenticateAccountRequest().password)
+    })
+
+    test('Deve lancar uma error se o LoginUseCase throws', async () => {
+      const { sut, loginUseCaseStub } = mockSut()
+      jest.spyOn(loginUseCaseStub, 'login').mockImplementationOnce(() => {
+        throw new Error()
+      })
+      const httpResponse = await sut.handle(mockAuthenticateAccountRequest())
+      expect(httpResponse).toEqual(serverError(new Error()))
+    })
   })
 })

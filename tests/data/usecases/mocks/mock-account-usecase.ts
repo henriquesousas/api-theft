@@ -20,8 +20,11 @@ export const mockCreateAccountUseCase = (): CreateAccount => {
 
 export const mockLoginUseCase = (): Authentication => {
   class LoginUseCaseStub implements Authentication {
-    async login (email: string, password: string): Promise<Account> {
-      return await new Promise(resolve => resolve(mockAccountModel()))
+    async login(email: string, password: string): Promise<Authentication.Result> {
+      return {
+        accessToken: 'any_token',
+        account: mockAccountModel()
+      }
     }
   }
   return new LoginUseCaseStub()

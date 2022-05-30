@@ -4,7 +4,7 @@ import { serverError } from '../../../../src/helpers/http/http'
 import { LogguerControllerDecorator } from '../../../../src/main/config/decorator/logguer-controller.decorator'
 import { mockLogguerRepository } from '../../../infra/repository/mocks'
 import { mockBaseController } from '../../../controllers/mocks/mock-controller'
-import { mockAccountRequest } from '../../../http'
+import { mockCreateAccountRequest } from '../../../http'
 
 type SutType = {
   sut: LogguerControllerDecorator
@@ -24,21 +24,21 @@ const mockSut = (): SutType => {
 }
 
 describe('LogguerController', () => {
-  test('deve chamar o Controller com o valor correto', async () => {
+  test('Deve chamar o LogguerController com o valor correto', async () => {
     const { sut, controllerStub } = mockSut()
     const controllerSpy = jest.spyOn(controllerStub, 'handle')
-    await sut.handle(mockAccountRequest())
-    expect(controllerSpy).toHaveBeenCalledWith(mockAccountRequest())
+    await sut.handle(mockCreateAccountRequest())
+    expect(controllerSpy).toHaveBeenCalledWith(mockCreateAccountRequest())
   })
 
-  test('deve retornar serverError quando o controller falhar', async () => {
+  test('Deve retornar serverError quando o controller falhar', async () => {
     const { sut, controllerStub } = mockSut()
     jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(new Promise(resolve => resolve(serverError(new Error()))))
-    const httpResponse = await sut.handle(mockAccountRequest())
+    const httpResponse = await sut.handle(mockCreateAccountRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
-  test('deve chamar o LogguerRepository com o valor correto', async () => {
+  test('Deve chamar o LogguerRepository com o valor correto', async () => {
     const { sut, logguerRepositoryStub, controllerStub } = mockSut()
 
     const error = new Error()
@@ -52,7 +52,7 @@ describe('LogguerController', () => {
     jest.spyOn(controllerStub, 'handle')
       .mockReturnValueOnce(new Promise(resolve => resolve(httpResponse)))
     const logguerSpy = jest.spyOn(logguerRepositoryStub, 'log')
-    await sut.handle(mockAccountRequest())
+    await sut.handle(mockCreateAccountRequest())
     expect(logguerSpy).toHaveBeenCalledWith('any_error')
   })
 })

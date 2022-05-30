@@ -2,7 +2,7 @@ import { CreateAccountController } from '../../src/controllers/account/create-ac
 import { serverError } from '../../src/helpers/http/http'
 import { CreateAccount, Validation } from '../../src/controllers/import-protocols'
 import { mockValidation } from '../validators/mocks'
-import { mockAccountRequest } from '../http'
+import { mockCreateAccountRequest } from '../http'
 import { mockCreateAccountUseCase } from '../data/usecases/mocks/mock-account-usecase'
 
 type SutTypes = {
@@ -26,16 +26,16 @@ describe('CreateAccountController', () => {
   test('Deve chamar o validation com os valores corretos', async () => {
     const { sut, validationStub } = mockSut()
     const validationSpy = jest.spyOn(validationStub, 'validate')
-    await sut.handle(mockAccountRequest())
-    expect(validationSpy).toHaveBeenCalledWith(mockAccountRequest().body)
+    await sut.handle(mockCreateAccountRequest())
+    expect(validationSpy).toHaveBeenCalledWith(mockCreateAccountRequest())
   })
 
   test('Deve chamar o AddAccountUseCase com os valores corretos', async () => {
     const { sut, addAccountUseCaseStub } = mockSut()
     const addAccountUseCaseSpy = jest.spyOn(addAccountUseCaseStub, 'create')
-    const fakeRequest = mockAccountRequest()
-    await sut.handle(fakeRequest)
-    expect(addAccountUseCaseSpy).toHaveBeenCalledWith(fakeRequest.body)
+    const httpRequest = mockCreateAccountRequest()
+    await sut.handle(httpRequest)
+    expect(addAccountUseCaseSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Deve retornar uma exception se o validation throws', async () => {
@@ -43,7 +43,7 @@ describe('CreateAccountController', () => {
     jest.spyOn(validationStub, 'validate').mockImplementationOnce(() => {
       throw new Error()
     })
-    const httpResponse = await sut.handle(mockAccountRequest())
+    const httpResponse = await sut.handle(mockCreateAccountRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
@@ -52,7 +52,7 @@ describe('CreateAccountController', () => {
     jest.spyOn(addAccountUseCaseStub, 'create').mockImplementationOnce(() => {
       throw new Error()
     })
-    const httpResponse = await sut.handle(mockAccountRequest())
+    const httpResponse = await sut.handle(mockCreateAccountRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 })

@@ -5,10 +5,10 @@ export interface Authentication {
 }
 
 export namespace Authentication {
-  export type Params = {
-    email: string
-    password: string
-  }
+  // export type Params = {
+  //   email: string
+  //   password: string
+  // }
 
   export type Result = {
     accessToken: string
