@@ -1,18 +1,20 @@
-import { sucess } from '../../helpers/http/http'
-import { ErrorFactory } from '../../helpers/errors/error-factory'
-import { AddAccount, HttpResponse, Validation, Controller } from '../../../controllers/import-protocols'
+import { AddAccount } from '@/domain/usecases/account'
+import { Validation } from '@/domain/validators'
+import { Controller, HttpResponse } from '@/presentation/protocols'
+import { sucess } from '@/presentation/helpers/http/http'
+import { ErrorFactory } from '@/presentation/helpers/errors'
 
 export class AddAccountController implements Controller {
   constructor(
     private readonly validation: Validation,
-    private readonly createAccountUseCase: AddAccount
+    private readonly useCase: AddAccount
   ) { }
 
   async handle(request: AddAccountController.Request): Promise<HttpResponse> {
     try {
       this.validation.validate(request)
       const { name, email, password } = request
-      const account = await this.createAccountUseCase.create({
+      const account = await this.useCase.create({
         name,
         email,
         password
