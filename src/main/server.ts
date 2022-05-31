@@ -1,4 +1,5 @@
-import { MongoHelper } from '../infra/repository/helper/mongo-helper'
+import 'module-alias/register'
+import { MongoHelper } from '@/infra/repository/helper/mongo-helper'
 import env from './config/env'
 
 MongoHelper.connect('mongodb://localhost:27017/theft')
