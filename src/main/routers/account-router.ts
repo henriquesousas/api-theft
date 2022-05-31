@@ -5,6 +5,7 @@ import { expressRouterAdapter } from '../adapters/express-router-adapter'
 import { makeLoginControllerFactory } from '../factories/controllers/login-controller.factory'
 
 export default (router: Router): void => {
+  // const adminAuth = expressMiddlewareAdapter(makeAuthMiddlewareFactory('admin'))
   router.use('/signup', expressRouterAdapter(makeCreateAccountControllerFactory()))
   router.use('/auth', expressRouterAdapter(makeLoginControllerFactory()))
 }
