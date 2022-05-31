@@ -2,11 +2,8 @@ import { AccountMongoRepositoy } from '../../../src/infra/repository/account-mon
 import { mockAccountDto } from '../../domain/dto/mock-account-dto'
 import { MongoHelper } from '../../../src/infra/repository/helper/mongo-helper'
 import env from '../../../src/main/config/env'
-
 import { Collection } from 'mongodb'
-import { Account } from '../../../src/domain/models/account'
 import { mockAccountModel } from '../../domain/models/account'
-
 
 let accountCollection: Collection
 

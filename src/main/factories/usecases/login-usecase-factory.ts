@@ -1,5 +1,5 @@
 import { JwtAdapter } from '../../../infra/criptography/jwt-adapter'
-import { LoginUseCase } from '../../../data/usecases/account/login-usecase'
+import { AuthenticateAccountUseCase } from '../../../data/usecases/account/authenticate-account-usecase'
 import { Authentication } from '../../../domain/usecases/account/authentication'
 import { BCrypter } from '../../../infra/criptography/bcrypter'
 import { AccountMongoRepositoy } from '../../../infra/repository/account-mongo-repository'
@@ -11,5 +11,5 @@ export const makeLoginUseCaseFactory = (): Authentication => {
   const encrypter = new JwtAdapter(env.jwtSecret)
   const loadAccountByEmailRepository = new AccountMongoRepositoy()
   const updateAccessTokenRepository = new AccountMongoRepositoy()
-  return new LoginUseCase(loadAccountByEmailRepository, updateAccessTokenRepository, hasher, encrypter)
+  return new AuthenticateAccountUseCase(loadAccountByEmailRepository, updateAccessTokenRepository, hasher, encrypter)
 }

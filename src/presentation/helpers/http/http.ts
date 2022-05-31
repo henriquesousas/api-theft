@@ -1,7 +1,7 @@
-import { NotFoundError } from '../erros/not-found-error'
-import { ServerError } from '../erros/server-error'
-import { UnauthorizedError } from '../erros/unauthorized-error'
-import { HttpResponse } from './http-response'
+import { NotFoundError } from '../errors/not-found-error'
+import { ServerError } from '../errors/server-error'
+import { UnauthorizedError } from '../errors/unauthorized-error'
+import { HttpResponse } from '../../protocols/http-response'
 
 export const sucess = (data: any): HttpResponse => {
   return {

@@ -1,7 +1,7 @@
 import { Controller, HttpRequest, HttpResponse, Validation } from '../import-protocols'
 import { CreateOccurrence } from '../../domain/usecases/occurrence/create-occurrence'
-import { sucess } from '../../helpers/http/http'
-import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
+import { sucess } from '../../presentation/helpers/http/http'
+import { ErrorFactory } from '../../presentation/helpers/errors/error-factory'
 
 export class CreateOccurrenceController implements Controller {
   constructor(

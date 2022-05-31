@@ -1,16 +1,16 @@
 import { Hasher } from '../../../src/data/protocols/cryptography/hasher'
-import { CreateAccountRepositoy } from '../../../src/data/protocols/repository/account/create-account-repository'
+import { AddAccountRepositoy } from '../protocols/repository/account/add-account-repository'
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/account/load-account-by-email-repository'
-import { CreateAccountUseCase } from '../../../src/data/usecases/account/create-account-usecase'
+import { AddAccountUseCase } from '../../../src/data/usecases/account/add-account-usecase'
+import { EmailInUseError } from '../../../src/presentation/helpers/errors/email-in-user-error'
 import { BCrypter } from '../../../src/infra/criptography/bcrypter'
 import { mockAddAccountRepositoryStub, mockLoadAccountByEmailRepository } from '../../infra/repository/mocks'
 import { mockAccountDto } from '../../domain'
 import { mockAccountModel } from '../models/mock-account'
-import { EmailInUseError } from '../../../src/helpers/erros/email-in-user-error'
 
 type SutTypes = {
-  sut: CreateAccountUseCase
-  addAccountRepositoryStub: CreateAccountRepositoy
+  sut: AddAccountUseCase
+  addAccountRepositoryStub: AddAccountRepositoy
   loadByEmailRepositoryStub: LoadAccountByEmailRepository
   hasherStub: Hasher
 }
@@ -20,7 +20,7 @@ const mockSut = (): SutTypes => {
   const hasherStub = new BCrypter(salt)
   const addAccountRepositoryStub = mockAddAccountRepositoryStub()
   const loadByEmailRepositoryStub = mockLoadAccountByEmailRepository()
-  const sut = new CreateAccountUseCase(hasherStub, addAccountRepositoryStub, loadByEmailRepositoryStub)
+  const sut = new AddAccountUseCase(hasherStub, addAccountRepositoryStub, loadByEmailRepositoryStub)
   return {
     sut,
     addAccountRepositoryStub,
@@ -29,7 +29,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('CreateAccountUseCase', () => {
+describe('AddAccountUseCase', () => {
   describe('LoadAccountByEmailRepository', () => {
     test('deve chamar o LoadAccountByEmailRepository com o valor correto', async () => {
       const { sut, loadByEmailRepositoryStub } = mockSut()

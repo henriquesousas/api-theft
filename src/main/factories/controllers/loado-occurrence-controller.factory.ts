@@ -1,5 +1,5 @@
 import { LoadOccurrenceController } from '../../../controllers/occurrence/load-occurrence-controller'
-import { Controller } from '../../../controllers/controller'
+import { Controller } from '../../../presentation/protocols/controller'
 import { LogguerMongoRepository } from '../../../infra/repository/logguer-mongo-repository'
 import { LogguerControllerDecorator } from '../../config/decorator/logguer-controller.decorator'
 import { makeLoadOccurrenceUseCaseFactory } from '../usecases/load-occurrence-usecase-factory'

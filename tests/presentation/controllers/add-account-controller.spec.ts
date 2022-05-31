@@ -1,20 +1,20 @@
-import { CreateAccountController } from '../../src/controllers/account/create-account-controller'
-import { serverError } from '../../src/helpers/http/http'
-import { CreateAccount, Validation } from '../../src/controllers/import-protocols'
-import { mockValidation } from '../validators/mocks'
-import { mockCreateAccountRequest } from '../http'
-import { mockCreateAccountUseCase } from '../data/usecases/mocks/mock-account-usecase'
+import { AddAccountController } from '../../../src/presentation/controllers/account/add-account-controller'
+import { serverError } from '../../../src/presentation/helpers/http/http'
+import { AddAccount, Validation } from '../../../src/controllers/import-protocols'
+import { mockValidation } from '../../validators/mocks'
+import { mockCreateAccountRequest } from '../../http'
+import { mockCreateAccountUseCase } from '../../data/usecases/mocks'
 
 type SutTypes = {
-  sut: CreateAccountController
+  sut: AddAccountController
   validationStub: Validation
-  addAccountUseCaseStub: CreateAccount
+  addAccountUseCaseStub: AddAccount
 }
 
 const mockSut = (): SutTypes => {
   const validationStub = mockValidation()
   const addAccountUseCaseStub = mockCreateAccountUseCase()
-  const sut = new CreateAccountController(validationStub, addAccountUseCaseStub)
+  const sut = new AddAccountController(validationStub, addAccountUseCaseStub)
   return {
     sut,
     validationStub,
@@ -22,7 +22,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('CreateAccountController', () => {
+describe('AddAccountController', () => {
   test('Deve chamar o validation com os valores corretos', async () => {
     const { sut, validationStub } = mockSut()
     const validationSpy = jest.spyOn(validationStub, 'validate')

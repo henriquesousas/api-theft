@@ -1,10 +1,10 @@
-import { CreateAccount, Authentication } from '../../../../src/controllers/import-protocols'
+import { AddAccount, Authentication } from '../../../../src/controllers/import-protocols'
 import { AccountDto } from '../../../../src/domain/dto/account-dto'
 import { Account } from '../../../../src/domain/models/account'
 import { mockAccountModel } from '../../models/mock-account'
 
-export const mockCreateAccountUseCase = (): CreateAccount => {
-  class AddAccountUseCaseStub implements CreateAccount {
+export const mockCreateAccountUseCase = (): AddAccount => {
+  class AddAccountUseCaseStub implements AddAccount {
     async create(dto: AccountDto): Promise<Account> {
       const account: Account = {
         id: 'any_id',
@@ -20,7 +20,7 @@ export const mockCreateAccountUseCase = (): CreateAccount => {
 
 export const mockLoginUseCase = (): Authentication => {
   class LoginUseCaseStub implements Authentication {
-    async login(email: string, password: string): Promise<Authentication.Result> {
+    async auth(email: string, password: string): Promise<Authentication.Result> {
       return {
         accessToken: 'any_token',
         account: mockAccountModel()

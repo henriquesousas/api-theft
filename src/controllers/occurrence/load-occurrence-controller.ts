@@ -1,7 +1,7 @@
 
-import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
+import { ErrorFactory } from '../../presentation/helpers/errors/error-factory'
 import { LoadOccurrenceById } from '../../domain/usecases/occurrence/load-occurrence-by-id'
-import { sucess } from '../../helpers/http/http'
+import { sucess } from '../../presentation/helpers/http/http'
 import { HttpRequest, HttpResponse, Controller } from '../import-protocols'
 
 export class LoadOccurrenceController implements Controller {

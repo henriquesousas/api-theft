@@ -1,7 +1,7 @@
 import { Account } from '../../models/account'
 
 export interface Authentication {
-  login (email: string, password: string): Promise<Authentication.Result>
+  auth (email: string, password: string): Promise<Authentication.Result>
 }
 
 export namespace Authentication {

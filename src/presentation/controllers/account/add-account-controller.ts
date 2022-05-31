@@ -1,14 +1,14 @@
 import { sucess } from '../../helpers/http/http'
-import { ErrorFactory } from '../../helpers/erros/factory/error-factory'
-import { CreateAccount, HttpResponse, Validation, Controller } from '../import-protocols'
+import { ErrorFactory } from '../../helpers/errors/error-factory'
+import { AddAccount, HttpResponse, Validation, Controller } from '../../../controllers/import-protocols'
 
-export class CreateAccountController implements Controller {
+export class AddAccountController implements Controller {
   constructor(
     private readonly validation: Validation,
-    private readonly createAccountUseCase: CreateAccount
+    private readonly createAccountUseCase: AddAccount
   ) { }
 
-  async handle(request: CreateAccountController.Request): Promise<HttpResponse> {
+  async handle(request: AddAccountController.Request): Promise<HttpResponse> {
     try {
       this.validation.validate(request)
       const { name, email, password } = request
@@ -24,7 +24,7 @@ export class CreateAccountController implements Controller {
   }
 }
 
-export namespace CreateAccountController {
+export namespace AddAccountController {
   export type Request = {
     name: string
     email: string

@@ -1,7 +1,7 @@
 import { Validation } from '../../src/controllers/import-protocols'
 import { CreateOccurrenceController } from '../../src/controllers/occurrence/create-occurrence-controller'
 import { CreateOccurrence } from '../../src/domain/usecases/occurrence/create-occurrence'
-import { serverError } from '../../src/helpers/http/http'
+import { serverError } from '../../src/presentation/helpers/http/http'
 import { mockCreateOccurrence } from '../data/usecases/mocks/mock-occurrence-usecase'
 import { mockAddOccurrenceRequest } from '../http/mock-occurrence-request'
 import { mockValidation } from '../validators/mocks'

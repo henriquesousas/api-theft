@@ -1,4 +1,4 @@
-import { Controller } from '../../../controllers/controller'
+import { Controller } from '../../../presentation/protocols/controller'
 import { HttpResponse } from '../../../controllers/import-protocols'
 import { LogguerRepository } from '../../../data/protocols/repository/logguer/logguer-repository'
 

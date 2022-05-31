@@ -1,12 +1,12 @@
-import { CreateAccountRepositoy } from '../../../../src/data/protocols/repository/account/create-account-repository'
+import { AddAccountRepositoy } from '../../../data/protocols/repository/account/add-account-repository'
 import { LoadAccountByEmailRepository } from '../../../../src/data/protocols/repository/account/load-account-by-email-repository'
 import { LoadAccountByIdRepository } from '../../../../src/data/protocols/repository/account/load-account-by-id-repository'
 import { UpdateAccessTokenRepository } from '../../../../src/data/protocols/repository/account/update-access-token-repository'
 import { AccountDto } from '../../../../src/domain/dto/account-dto'
 import { Account } from '../../../../src/domain/models/account'
 
-export const mockAddAccountRepositoryStub = (): CreateAccountRepositoy => {
-  class AddAccountRepositoryStub implements CreateAccountRepositoy {
+export const mockAddAccountRepositoryStub = (): AddAccountRepositoy => {
+  class AddAccountRepositoryStub implements AddAccountRepositoy {
     async create(dto: AccountDto): Promise<Account> {
       const account: Account = {
         id: 'any_id',

@@ -1,11 +1,11 @@
-import { EmailInUseError } from '../../../helpers/erros/email-in-user-error'
-import { CreateAccount, Account, AccountDto } from '../import-domain'
-import { LoadAccountByEmailRepository, CreateAccountRepositoy, Hasher } from '../import-protocols'
+import { EmailInUseError } from '../../../presentation/helpers/errors/email-in-user-error'
+import { AddAccount, Account, AccountDto } from '../import-domain'
+import { LoadAccountByEmailRepository, AddAccountRepositoy, Hasher } from '../import-protocols'
 
-export class CreateAccountUseCase implements CreateAccount {
+export class AddAccountUseCase implements AddAccount {
   constructor(
     private readonly hasher: Hasher,
-    private readonly createAccountRepository: CreateAccountRepositoy,
+    private readonly addAccountRepository: AddAccountRepositoy,
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) { }
 
@@ -16,6 +16,6 @@ export class CreateAccountUseCase implements CreateAccount {
     }
     const hashedPassword = await this.hasher.hash(dto.password)
     const accountDtoWithHashedPassword = Object.assign(dto, { password: hashedPassword })
-    return await this.createAccountRepository.create(accountDtoWithHashedPassword)
+    return await this.addAccountRepository.create(accountDtoWithHashedPassword)
   }
 }

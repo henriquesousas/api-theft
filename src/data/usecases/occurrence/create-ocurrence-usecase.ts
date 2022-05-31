@@ -1,6 +1,6 @@
 import { OccurrenceDto } from '../../../domain/dto/occurrence-dto'
 import { CreateOccurrence } from '../../../domain/usecases/occurrence/create-occurrence'
-import { UnauthorizedError } from '../../../helpers/erros/unauthorized-error'
+import { UnauthorizedError } from '../../../presentation/helpers/errors/unauthorized-error'
 import { LoadAccountByIdRepository } from '../../protocols/repository/account/load-account-by-id-repository'
 import { AddOccurrenceRepositoy } from '../../protocols/repository/ocurrence/add-occurrence-repository'
 

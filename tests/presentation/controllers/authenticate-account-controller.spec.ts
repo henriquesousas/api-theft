@@ -1,14 +1,14 @@
-import { Validation } from '../../src/controllers/import-protocols'
-import { LoginController } from '../../src/controllers/account/login-account-controller'
-import { Authentication } from '../../src/domain/usecases/account/authentication'
-import { serverError } from '../../src/helpers/http/http'
-import { ValidationComposite } from '../../src/validators/validation-composite'
-import { ValidationRequiredField } from '../../src/validators/validation-required-field'
-import { mockLoginUseCase } from '../data/usecases/mocks/mock-account-usecase'
-import { mockAuthenticateAccountRequest } from '../http'
+import { Validation } from '../../../src/controllers/import-protocols'
+import { AuthenticateController } from '../../../src/presentation/controllers/account/authenticate-controller'
+import { Authentication } from '../../../src/domain/usecases/account/authentication'
+import { serverError } from '../../../src/presentation/helpers/http/http'
+import { ValidationComposite } from '../../../src/validators/validation-composite'
+import { ValidationRequiredField } from '../../../src/validators/validation-required-field'
+import { mockLoginUseCase } from '../../data/usecases/mocks/mock-account-usecase'
+import { mockAuthenticateAccountRequest } from '../../http'
 
 type SutTypes = {
-  sut: LoginController
+  sut: AuthenticateController
   validationStub: Validation
   loginUseCaseStub: Authentication
 }
@@ -18,7 +18,7 @@ const mockSut = (): SutTypes => {
     new ValidationRequiredField('email')]
   )
   const loginUseCaseStub = mockLoginUseCase()
-  const sut = new LoginController(validationStub, loginUseCaseStub)
+  const sut = new AuthenticateController(validationStub, loginUseCaseStub)
   return {
     sut,
     loginUseCaseStub,
@@ -26,7 +26,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('LoginController', () => {
+describe('AuthenticateAccountController', () => {
   describe('Validation', () => {
     test('Deve chamar o Validate com os valores correto', async () => {
       const { sut, validationStub } = mockSut()
@@ -39,7 +39,7 @@ describe('LoginController', () => {
   describe('Authentication', () => {
     test('Deve chamar o LoginUseCase com os valores correto', async () => {
       const { sut, loginUseCaseStub } = mockSut()
-      const useCaseSpy = jest.spyOn(loginUseCaseStub, 'login')
+      const useCaseSpy = jest.spyOn(loginUseCaseStub, 'auth')
       await sut.handle(mockAuthenticateAccountRequest())
       expect(useCaseSpy).toHaveBeenCalledWith(
         mockAuthenticateAccountRequest().email,
@@ -48,7 +48,7 @@ describe('LoginController', () => {
 
     test('Deve lancar uma error se o LoginUseCase throws', async () => {
       const { sut, loginUseCaseStub } = mockSut()
-      jest.spyOn(loginUseCaseStub, 'login').mockImplementationOnce(() => {
+      jest.spyOn(loginUseCaseStub, 'auth').mockImplementationOnce(() => {
         throw new Error()
       })
       const httpResponse = await sut.handle(mockAuthenticateAccountRequest())
