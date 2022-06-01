@@ -1,15 +1,14 @@
-import { Encrypter } from '../../protocols/cryptography/encrypter'
-import { UpdateAccessTokenRepository } from '../../protocols/repository/account/update-access-token-repository'
-import { Authentication } from '../../../domain/usecases/account/authentication'
-import { UnauthorizedError } from '../../../presentation/helpers/errors/unauthorized-error'
-import { LoadAccountByEmailRepository, HashComparer } from '../import-protocols'
+import { UnauthorizedError } from '../../../presentation/helpers/errors'
+import { Authentication } from '../import-domain'
+import { LoadAccountByEmailRepository } from '../import-protocols'
+import { Encrypter } from '../../../data/protocols/cryptography/encrypter'
+import { HashComparer } from '../../../data/protocols/cryptography/hasher-comparer'
 
 export class AuthenticateAccountUseCase implements Authentication {
   constructor(
-    private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository,
-    private readonly updateAccessTokenRepository: UpdateAccessTokenRepository,
     private readonly hasher: HashComparer,
-    private readonly encrypter: Encrypter
+    private readonly encrypter: Encrypter,
+    private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) { }
 
   async auth(email: string, password: string): Promise<Authentication.Result> {

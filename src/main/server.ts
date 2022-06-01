@@ -1,8 +1,9 @@
 import 'module-alias/register'
-import { MongoHelper } from '@/infra/repository/helper/mongo-helper'
-import env from './config/env'
 
-MongoHelper.connect('mongodb://localhost:27017/theft')
+import { MongoHelper } from '@/infra/repository/helper/mongo-helper'
+import env from '@/main/config/env'
+
+MongoHelper.connect(env.mongoUrl)
   .then(async () => {
     const app = (await import('./config/app')).default
     app.listen(env.port, () => {

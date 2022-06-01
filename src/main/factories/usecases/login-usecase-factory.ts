@@ -10,6 +10,5 @@ export const makeLoginUseCaseFactory = (): Authentication => {
   const hasher = new BCrypter(salt)
   const encrypter = new JwtAdapter(env.jwtSecret)
   const loadAccountByEmailRepository = new AccountMongoRepositoy()
-  const updateAccessTokenRepository = new AccountMongoRepositoy()
-  return new AuthenticateAccountUseCase(loadAccountByEmailRepository, updateAccessTokenRepository, hasher, encrypter)
+  return new AuthenticateAccountUseCase(hasher, encrypter, loadAccountByEmailRepository)
 }

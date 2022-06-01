@@ -4,7 +4,7 @@ export const MongoHelper = {
   client: null as MongoClient,
   uri: String,
 
-  async connect (uri: string) {
+  async connect(uri: string) {
     this.uri = uri
     this.client = await MongoClient.connect(uri, {
       useNewUrlParser: true,
@@ -12,11 +12,11 @@ export const MongoHelper = {
     })
   },
 
-  async disconnect () {
+  async disconnect() {
     this.client.close()
   },
 
-  getCollection (name: string): Collection {
+  getCollection(name: string): Collection {
     return this.client.db().collection(name)
   },
 

@@ -6,6 +6,6 @@ import { makeLoginControllerFactory } from '../factories/controllers/login-contr
 
 export default (router: Router): void => {
   // const adminAuth = expressMiddlewareAdapter(makeAuthMiddlewareFactory('admin'))
-  router.use('/signup', expressRouterAdapter(makeCreateAccountControllerFactory()))
-  router.use('/auth', expressRouterAdapter(makeLoginControllerFactory()))
+  router.post('/signup', expressRouterAdapter(makeCreateAccountControllerFactory()))
+  router.post('/auth', expressRouterAdapter(makeLoginControllerFactory()))
 }

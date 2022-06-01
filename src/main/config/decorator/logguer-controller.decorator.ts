@@ -2,6 +2,7 @@ import { Controller } from '../../../presentation/protocols/controller'
 import { HttpResponse } from '../../../controllers/import-protocols'
 import { LogguerRepository } from '../../../data/protocols/repository/logguer/logguer-repository'
 
+// TODO: remove decorator folder to outside
 export class LogguerControllerDecorator implements Controller {
   constructor(
     private readonly controller: Controller,
