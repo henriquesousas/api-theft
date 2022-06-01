@@ -1,6 +1,9 @@
-import { EmailInUseError } from '../../../presentation/helpers/errors/email-in-user-error'
-import { AddAccount, Account, AccountDto } from '../import-domain'
-import { LoadAccountByEmailRepository, AddAccountRepositoy, Hasher } from '../import-protocols'
+import { AccountDto } from '@/domain/dto'
+import { Account } from '@/domain/models'
+import { AddAccount } from '@/domain/usecases/account'
+import { EmailInUseError } from '@/presentation/helpers/errors'
+import { Hasher } from '@/data/protocols/cryptography/hasher'
+import { AddAccountRepositoy, LoadAccountByEmailRepository } from '@/data/protocols/repository/account'
 
 export class AddAccountUseCase implements AddAccount {
   constructor(

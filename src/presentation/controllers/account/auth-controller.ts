@@ -4,7 +4,7 @@ import { Controller, HttpResponse } from '@/presentation/protocols'
 import { ErrorFactory } from '@/presentation/helpers/errors'
 import { sucess } from '@/presentation/helpers/http/http'
 
-export class AuthenticateController implements Controller {
+export class AuthController implements Controller {
   constructor(
     private readonly validation: Validation,
     private readonly useCase: Authentication

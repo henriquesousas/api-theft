@@ -1,10 +1,10 @@
-import { UnauthorizedError } from '../../../presentation/helpers/errors'
-import { Authentication } from '../import-domain'
-import { LoadAccountByEmailRepository } from '../import-protocols'
-import { Encrypter } from '../../../data/protocols/cryptography/encrypter'
-import { HashComparer } from '../../../data/protocols/cryptography/hasher-comparer'
+import { Authentication } from '@/domain/usecases/account/authentication'
+import { Encrypter } from '@/data/protocols/cryptography/encrypter'
+import { HashComparer } from '@/data/protocols/cryptography/hasher-comparer'
+import { UnauthorizedError } from '@/presentation/helpers/errors'
+import { LoadAccountByEmailRepository } from '@/data/protocols/repository/account/load-account-by-email-repository'
 
-export class AuthenticateAccountUseCase implements Authentication {
+export class AuthAccountUseCase implements Authentication {
   constructor(
     private readonly hasher: HashComparer,
     private readonly encrypter: Encrypter,

@@ -1,2 +1,2 @@
 export * from './add-account-controller'
-export * from './authenticate-controller'
+export * from './auth-controller'

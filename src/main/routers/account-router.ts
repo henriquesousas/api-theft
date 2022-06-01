@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
-import { makeCreateAccountControllerFactory } from '../factories/controllers/create-account-controller-factory'
+import { makeAddAccountControllerFactory } from '../factories/controllers/add-account-controller-factory'
 import { expressRouterAdapter } from '../adapters/express-router-adapter'
-import { makeLoginControllerFactory } from '../factories/controllers/login-controller.factory'
+import { makeAuthControllerFactory } from '../factories/controllers/auth-controller.factory'
 
 export default (router: Router): void => {
   // const adminAuth = expressMiddlewareAdapter(makeAuthMiddlewareFactory('admin'))
-  router.post('/signup', expressRouterAdapter(makeCreateAccountControllerFactory()))
-  router.post('/auth', expressRouterAdapter(makeLoginControllerFactory()))
+  router.post('/signup', expressRouterAdapter(makeAddAccountControllerFactory()))
+  router.post('/auth', expressRouterAdapter(makeAuthControllerFactory()))
 }

@@ -1,11 +1,16 @@
-import { Controller, HttpRequest, HttpResponse, Validation } from '../import-protocols'
-import { CreateOccurrence } from '../../domain/usecases/occurrence/create-occurrence'
+// import { Controller, HttpRequest, HttpResponse, Validation } from '../import-protocols'
+// import { CreateOccurrence } from '../../domain/usecases/occurrence/create-occurrence'
+// import { sucess } from '../../presentation/helpers/http/http'
+// import { ErrorFactory } from '../../presentation/helpers/errors/error-factory'
+
 import { sucess } from '../../presentation/helpers/http/http'
-import { ErrorFactory } from '../../presentation/helpers/errors/error-factory'
+import { CreateOccurrenceUsecase } from '../../data/usecases/occurrence/create-ocurrence-usecase'
+import { Controller, HttpRequest, HttpResponse, Validation } from '../import-protocols'
+import { ErrorFactory } from '../../presentation/helpers/errors'
 
 export class CreateOccurrenceController implements Controller {
   constructor(
-    private readonly createOccurrenceUseCase: CreateOccurrence,
+    private readonly createOccurrenceUseCase: CreateOccurrenceUsecase,
     private readonly validation: Validation) { }
 
   // TODO: refactor return
