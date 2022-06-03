@@ -1,9 +1,10 @@
 import { AddAccountController } from '../../../src/presentation/controllers/account/add-account-controller'
 import { serverError } from '../../../src/presentation/helpers/http/http'
-import { AddAccount, Validation } from '../../../src/controllers/import-protocols'
 import { mockValidation } from '../../validators/mocks'
 import { mockCreateAccountRequest } from '../../http'
 import { mockCreateAccountUseCase } from '../../data/usecases/mocks'
+import { Validation } from '@/domain/validators'
+import { AddAccount } from '@/domain/usecases/account'
 
 type SutTypes = {
   sut: AddAccountController

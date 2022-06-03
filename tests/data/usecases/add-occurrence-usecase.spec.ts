@@ -1,12 +1,12 @@
-import { LoadAccountByIdRepository } from '../../../src/data/protocols/repository/account/load-account-by-id-repository'
-import { AddOccurrenceRepositoy } from '../../../src/data/protocols/repository/ocurrence/add-occurrence-repository'
-import { CreateOccurrenceUsecase } from '../../../src/data/usecases/occurrence/create-ocurrence-usecase'
+import { LoadAccountByIdRepository } from '../protocols/repository/account/load-account-by-id-repository'
+import { AddOccurrenceRepositoy } from '../protocols/repository/ocurrence/add-occurrence-repository'
+import { AddOccurrenceUsecase } from '@/data/usecases/occurrence/add-ocurrence-usecase'
 import { mockOccurrenceDto } from '../../domain/dto/mock-occurrence-dto'
 import { mockLoadAccountByIdRepository } from '../../infra/repository/mocks'
 import { mockAddOccurrenceRepository } from '../../infra/repository/mocks/mock-add-occurrence-repository'
 
 type SutTypes = {
-  sut: CreateOccurrenceUsecase
+  sut: AddOccurrenceUsecase
   addOccurrenceRepositoyStub: AddOccurrenceRepositoy
   loadAccountByIdRepositoryStub: LoadAccountByIdRepository
 }
@@ -14,7 +14,7 @@ type SutTypes = {
 const mockSut = (): SutTypes => {
   const addOccurrenceRepositoyStub = mockAddOccurrenceRepository()
   const loadAccountByIdRepositoryStub = mockLoadAccountByIdRepository()
-  const sut = new CreateOccurrenceUsecase(addOccurrenceRepositoyStub, loadAccountByIdRepositoryStub)
+  const sut = new AddOccurrenceUsecase(addOccurrenceRepositoyStub, loadAccountByIdRepositoryStub)
   return {
     sut,
     addOccurrenceRepositoyStub,

@@ -7,7 +7,7 @@ import { Authentication } from '../../domain/usecases/account/authentication'
 import { UnauthorizedError } from '../../../src/presentation/helpers/errors/unauthorized-error'
 import { mockHasherComparer, mockJwtAdapter } from '../../infra/criptography/mocks'
 import { mockUpdateAccessTokenRepository } from '../../infra/repository/mocks/mock-account-repository'
-import { Account } from './import-domain'
+import { Account } from '@/domain/models'
 
 type SutTypes = {
   sut: Authentication

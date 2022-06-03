@@ -1,4 +1,5 @@
-import { AddAccount, Authentication } from '../../../../src/controllers/import-protocols'
+
+import { AddAccount, Authentication } from '@/domain/usecases/account'
 import { AccountDto } from '../../../../src/domain/dto/account-dto'
 import { Account } from '../../../../src/domain/models/account'
 import { mockAccountModel } from '../../models/mock-account'

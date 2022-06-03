@@ -1,12 +1,10 @@
-import { Validation } from '../../../src/controllers/import-protocols'
-import { AuthController } from '../../../src/presentation/controllers/account/auth-controller'
-// import { Authentication } from '../../../src/domain/usecases/account/authentication'
+import { AuthController } from '@/presentation/controllers/account/auth-controller'
 import { Authentication } from '@/domain/usecases/account/authentication'
-import { serverError } from '../../../src/presentation/helpers/http/http'
-import { ValidationComposite } from '../../../src/validators/validation-composite'
-import { ValidationRequiredField } from '../../../src/validators/validation-required-field'
+import { serverError } from '@/presentation/helpers/http/http'
+import { ValidationComposite, ValidationRequiredField } from '@/validators'
 import { mockLoginUseCase } from '../../data/usecases/mocks/mock-account-usecase'
 import { mockAuthenticateAccountRequest } from '../../http'
+import { Validation } from '@/domain/validators'
 
 type SutTypes = {
   sut: AuthController

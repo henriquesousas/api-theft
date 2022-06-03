@@ -1,4 +1,4 @@
-import { HttpRequest } from '../../src/controllers/import-protocols'
+import { HttpRequest } from '@/presentation/protocols'
 import { mockAddrress, mockOccurrence } from '../data/models/mock-occurrence'
 
 export const mockAddOccurrenceRequest = (): HttpRequest => {

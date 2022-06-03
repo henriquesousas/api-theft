@@ -1,5 +1,5 @@
+import { HttpRequest, HttpResponse } from '@/presentation/protocols'
 import { Controller } from '../../presentation/protocols/controller'
-import { HttpRequest, HttpResponse } from '../../../src/controllers/import-protocols'
 
 export const mockBaseController = (): Controller => {
   class ControllerStub implements Controller {

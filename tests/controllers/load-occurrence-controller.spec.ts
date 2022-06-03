@@ -1,7 +1,7 @@
-import { LoadOccurrenceController } from '../../src/controllers/occurrence/load-occurrence-controller'
-import { serverError } from '../../src/presentation/helpers/http/http'
-import { mockOccurrence } from '../data/models/mock-occurrence'
+import { LoadOccurrenceController } from '@/presentation/controllers/occurrences/load-occurrence-controller'
+import { serverError } from '@/presentation/helpers/http/http'
 import { mockLoadOccurrenceByIdUseCase } from '../data/usecases/mocks/mock-occurrence-usecase'
+import { mockOccurrence } from '../data/models/mock-occurrence'
 
 describe('LoadOccurrenceController', () => {
   test('Deve chamar o LoadOccurrenceById com o valor correto', async () => {

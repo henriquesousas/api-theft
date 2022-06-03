@@ -1,4 +1,4 @@
-import { Validation } from '../../../src/controllers/import-protocols'
+import { Validation } from '@/domain/validators'
 
 export const mockValidation = (): Validation => {
   class ValidationStub implements Validation {
