@@ -5,14 +5,17 @@ import { mockAccountModel } from '../../models/mock-account'
 
 export const mockCreateAccountUseCase = (): AddAccount => {
   class AddAccountUseCaseStub implements AddAccount {
-    async create(dto: AccountDto): Promise<Account> {
+    async create(dto: AccountDto): Promise<AddAccount.Result> {
       const account: Account = {
         id: 'any_id',
         name: 'any_name',
         email: 'any_email',
         password: 'any_password'
       }
-      return account
+      return {
+        accessToken: 'any_token',
+        account
+      }
     }
   }
   return new AddAccountUseCaseStub()

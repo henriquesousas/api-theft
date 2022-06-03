@@ -7,6 +7,7 @@ import { BCrypter } from '../../../src/infra/criptography/bcrypter'
 import { mockAddAccountRepositoryStub, mockLoadAccountByEmailRepository } from '../../infra/repository/mocks'
 import { mockAccountDto } from '../../domain'
 import { mockAccountModel } from '../models/mock-account'
+import { JwtAdapter } from '@/infra/criptography'
 
 type SutTypes = {
   sut: AddAccountUseCase
@@ -18,9 +19,10 @@ type SutTypes = {
 const mockSut = (): SutTypes => {
   const salt = 12
   const hasherStub = new BCrypter(salt)
+  const jwtAdapter = new JwtAdapter('secrete')
   const addAccountRepositoryStub = mockAddAccountRepositoryStub()
   const loadByEmailRepositoryStub = mockLoadAccountByEmailRepository()
-  const sut = new AddAccountUseCase(hasherStub, addAccountRepositoryStub, loadByEmailRepositoryStub)
+  const sut = new AddAccountUseCase(hasherStub, jwtAdapter, addAccountRepositoryStub, loadByEmailRepositoryStub)
   return {
     sut,
     addAccountRepositoryStub,
