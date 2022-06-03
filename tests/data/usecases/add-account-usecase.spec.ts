@@ -31,15 +31,15 @@ const mockSut = (): SutTypes => {
 
 describe('AddAccountUseCase', () => {
   describe('LoadAccountByEmailRepository', () => {
-    test('deve chamar o LoadAccountByEmailRepository com o valor correto', async () => {
+    test('Deve chamar o LoadAccountByEmailRepository com o valor correto', async () => {
       const { sut, loadByEmailRepositoryStub } = mockSut()
       const loadByEmailSpy = jest.spyOn(loadByEmailRepositoryStub, 'loadByEmail')
-      const fakeDto = mockAccountDto()
-      await sut.create(fakeDto)
-      expect(loadByEmailSpy).toHaveBeenCalledWith(fakeDto.email)
+      const accountDto = mockAccountDto()
+      await sut.create(accountDto)
+      expect(loadByEmailSpy).toHaveBeenCalledWith('any_email')
     })
 
-    test('deve lançar uma exception se LoadAccountByEmailRepository throws', async () => {
+    test('Deve lançar uma exception se LoadAccountByEmailRepository throws', async () => {
       const { sut, loadByEmailRepositoryStub } = mockSut()
       jest.spyOn(loadByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
       const fakeDto = mockAccountDto()
@@ -47,7 +47,7 @@ describe('AddAccountUseCase', () => {
       await expect(promise).rejects.toThrow()
     })
 
-    test('deve lançar um error (EmailInUseError) se LoadAccountByEmailRepository tentar cadastrar uma conta com email existente', async () => {
+    test('Deve lançar um error (EmailInUseError) se LoadAccountByEmailRepository tentar cadastrar uma conta com email existente', async () => {
       const { sut, loadByEmailRepositoryStub } = mockSut()
       jest.spyOn(loadByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(Promise.resolve(mockAccountModel()))
       const promise = sut.create(mockAccountDto())

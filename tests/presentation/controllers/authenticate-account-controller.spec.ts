@@ -1,6 +1,7 @@
 import { Validation } from '../../../src/controllers/import-protocols'
-import { AuthenticateController } from '../../../src/presentation/controllers/account/authenticate-controller'
-import { Authentication } from '../../../src/domain/usecases/account/authentication'
+import { AuthController } from '../../../src/presentation/controllers/account/auth-controller'
+// import { Authentication } from '../../../src/domain/usecases/account/authentication'
+import { Authentication } from '@/domain/usecases/account/authentication'
 import { serverError } from '../../../src/presentation/helpers/http/http'
 import { ValidationComposite } from '../../../src/validators/validation-composite'
 import { ValidationRequiredField } from '../../../src/validators/validation-required-field'
@@ -8,7 +9,7 @@ import { mockLoginUseCase } from '../../data/usecases/mocks/mock-account-usecase
 import { mockAuthenticateAccountRequest } from '../../http'
 
 type SutTypes = {
-  sut: AuthenticateController
+  sut: AuthController
   validationStub: Validation
   loginUseCaseStub: Authentication
 }
@@ -18,7 +19,7 @@ const mockSut = (): SutTypes => {
     new ValidationRequiredField('email')]
   )
   const loginUseCaseStub = mockLoginUseCase()
-  const sut = new AuthenticateController(validationStub, loginUseCaseStub)
+  const sut = new AuthController(validationStub, loginUseCaseStub)
   return {
     sut,
     loginUseCaseStub,

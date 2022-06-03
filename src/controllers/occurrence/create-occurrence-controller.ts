@@ -4,13 +4,13 @@
 // import { ErrorFactory } from '../../presentation/helpers/errors/error-factory'
 
 import { sucess } from '../../presentation/helpers/http/http'
-import { CreateOccurrenceUsecase } from '../../data/usecases/occurrence/create-ocurrence-usecase'
 import { Controller, HttpRequest, HttpResponse, Validation } from '../import-protocols'
 import { ErrorFactory } from '../../presentation/helpers/errors'
+import { CreateOccurrence } from '../../domain/usecases/occurrence'
 
 export class CreateOccurrenceController implements Controller {
   constructor(
-    private readonly createOccurrenceUseCase: CreateOccurrenceUsecase,
+    private readonly createOccurrenceUseCase: CreateOccurrence,
     private readonly validation: Validation) { }
 
   // TODO: refactor return

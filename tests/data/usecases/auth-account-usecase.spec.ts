@@ -1,13 +1,13 @@
-import { Encrypter } from '../../../src/data/protocols/cryptography/encrypter'
-import { HashComparer } from '../../../src/data/protocols/cryptography/hasher-comparer'
-import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/account/load-account-by-email-repository'
-import { UpdateAccessTokenRepository } from '../../../src/data/protocols/repository/account/update-access-token-repository'
-import { AuthenticateAccountUseCase } from '../../../src/data/usecases/account/authenticate-account-usecase'
-import { Authentication } from '../../../src/domain/usecases/account/authentication'
+import { Encrypter } from '../protocols/cryptography/encrypter'
+import { HashComparer } from '../protocols/cryptography/hasher-comparer'
+import { LoadAccountByEmailRepository } from '../protocols/repository/account/load-account-by-email-repository'
+import { UpdateAccessTokenRepository } from '../protocols/repository/account/update-access-token-repository'
+import { AuthAccountUseCase } from '../../../src/data/usecases/account/auth-account-usecase'
+import { Authentication } from '../../domain/usecases/account/authentication'
 import { UnauthorizedError } from '../../../src/presentation/helpers/errors/unauthorized-error'
 import { mockHasherComparer, mockJwtAdapter } from '../../infra/criptography/mocks'
 import { mockUpdateAccessTokenRepository } from '../../infra/repository/mocks/mock-account-repository'
-import { Account } from '../../../src/domain/models/account'
+import { Account } from './import-domain'
 
 type SutTypes = {
   sut: Authentication
@@ -36,7 +36,7 @@ const mockSut = (): SutTypes => {
   const updateAccessTokenRepositoryStub = mockUpdateAccessTokenRepository()
   const hasherComparerStub = mockHasherComparer()
   const jwtAdapterEncrypterStub = mockJwtAdapter()
-  const sut = new AuthenticateAccountUseCase(loadAccountByEmailRepositoryStub,updateAccessTokenRepositoryStub, hasherComparerStub, jwtAdapterEncrypterStub)
+  const sut = new AuthAccountUseCase(hasherComparerStub, jwtAdapterEncrypterStub, loadAccountByEmailRepositoryStub)
   return {
     sut,
     loadAccountByEmailRepositoryStub,
@@ -46,7 +46,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('AuthenticateAccountUseCase', () => {
+describe('AuthAccountUseCase', () => {
   describe('LoadAccountByEmailRepository', () => {
     test('deve chamar LoadAccountByEmailRepository com os valores corretos', async () => {
       const { sut, loadAccountByEmailRepositoryStub } = mockSut()

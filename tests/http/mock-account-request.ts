@@ -1,5 +1,5 @@
+import { AuthenticateController } from '../presentation/controllers/account/auth-controller'
 import { AddAccountController } from '../presentation/controllers/account/add-account-controller'
-import { AuthenticateController } from '../presentation/controllers/account/authenticate-controller'
 
 export const mockCreateAccountRequest = (): AddAccountController.Request => {
   const request = {
