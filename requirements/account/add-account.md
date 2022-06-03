@@ -1,6 +1,7 @@
 # Signup
 
 > ## Casos de sucesso
+🔲✅
 
 1. ✅  Recebe uma requisição do tipo **POST** na rota **/api/signup**
 2. ✅  Valida dados obrigatórios **name**, **email**, **password**
@@ -8,9 +9,8 @@
 4. ✅  **Valida** se já existe um usuário com o email fornecido
 5. ✅  Gera uma senha **criptografada** (essa senha não pode ser descriptografada)
 6. ✅  **Cria** uma conta para o usuário com os dados informados, **substituindo** a senha pela senha criptorafada
-7. 🔲  Gera um **token** de acesso a partir do ID do usuário
-8. 🔲  **Atualiza** os dados do usuário com o token de acesso gerado
-9. 🔲  Retorna **200** com o token de acesso e o nome do usuário
+7. ✅  Gera um **token** de acesso a partir do ID do usuário
+8. ✅  Retorna **200** com o token de acesso e o nome do usuário
 
 ---
 
@@ -22,5 +22,4 @@
 4. ✅ Retorna erro **403** se o email fornecido já estiver em uso
 5. ✅ Retorna erro **500** se der erro ao tentar gerar uma senha criptografada
 6. ✅ Retorna erro **500** se der erro ao tentar criar a conta do usuário
-7. 🔲 Retorna erro **500** se der erro ao tentar gerar o token de acesso
-8. 🔲 Retorna erro **500** se der erro ao tentar atualizar o usuário com o token de acesso gerados
+7. ✅ Retorna erro **500** se der erro ao tentar gerar o token de acesso
