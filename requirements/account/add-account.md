@@ -9,8 +9,8 @@
 4. ✅  **Valida** se já existe um usuário com o email fornecido
 5. ✅  Gera uma senha **criptografada** (essa senha não pode ser descriptografada)
 6. ✅  **Cria** uma conta para o usuário com os dados informados, **substituindo** a senha pela senha criptorafada
-7. 🔲  Gera um **token** de acesso a partir do ID do usuário
-8. 🔲  Retorna **200** com o token de acesso e o nome do usuário
+7. ✅  Gera um **token** de acesso a partir do ID do usuário
+8. ✅  Retorna **200** com o token de acesso e o nome do usuário
 
 ---
 
