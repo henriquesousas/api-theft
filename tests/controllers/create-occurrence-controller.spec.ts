@@ -1,5 +1,5 @@
 import { AddOccurrenceController } from '@/presentation/controllers/occurrences/add-occurrence-controller'
-import { CreateOccurrence } from '../../src/domain/usecases/occurrence/create-occurrence'
+import { AddOccurrence } from '../domain/usecases/occurrence/add-occurrence'
 import { serverError } from '../../src/presentation/helpers/http/http'
 import { mockCreateOccurrence } from '../data/usecases/mocks/mock-occurrence-usecase'
 import { mockAddOccurrenceRequest } from '../http/mock-occurrence-request'
@@ -8,7 +8,7 @@ import { Validation } from '@/domain/validators'
 
 type SutTypes = {
   sut: AddOccurrenceController
-  addOccurrenceUseCaseStub: CreateOccurrence
+  addOccurrenceUseCaseStub: AddOccurrence
   validationStub: Validation
 }
 
