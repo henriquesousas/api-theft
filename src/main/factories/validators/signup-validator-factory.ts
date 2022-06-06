@@ -1,8 +1,10 @@
 import { Validation } from '@/domain/validators'
-import { EmailValidation } from '../../../validators/email-validation'
-import { ValidationComposite } from '../../../validators/validation-composite'
-import { ValidationEmailField } from '../../../validators/validation-email-field'
-import { ValidationRequiredField } from '../../../validators/validation-required-field'
+import {
+  EmailValidation,
+  ValidationComposite,
+  ValidationRequiredField,
+  ValidationEmailField
+} from '@/validators'
 
 export const makeCreateAccountValidatorFactory = (): Validation => {
   return new ValidationComposite([

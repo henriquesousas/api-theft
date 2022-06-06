@@ -1,6 +1,5 @@
-import { Controller } from '../../presentation/protocols/controller'
-import { LogguerRepository } from '../../data/protocols/repository/logguer/logguer-repository'
-import { HttpResponse } from '@/presentation/protocols'
+import { LogguerRepository } from '@/data/protocols/repository/logguer/logguer-repository'
+import { Controller, HttpResponse } from '@/presentation/protocols'
 
 export class LogguerControllerDecorator implements Controller {
   constructor(

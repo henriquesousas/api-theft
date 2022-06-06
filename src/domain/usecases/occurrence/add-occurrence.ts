@@ -1,4 +1,4 @@
-import { OccurrenceDto } from '../../dto/occurrence-dto'
+import { OccurrenceDto } from '@/domain/dto/occurrence-dto'
 
 export interface AddOccurrence {
   add(dto: OccurrenceDto): Promise<number>

@@ -1,9 +1,9 @@
-import { sucess } from '../../helpers/http/http'
-import { ErrorFactory } from '../../helpers/errors'
-import { AddOccurrence } from '../../../domain/usecases/occurrence'
-import { Controller, HttpResponse } from '@/presentation/protocols'
 import { Validation } from '@/domain/validators'
+import { AddOccurrence } from '@/domain/usecases/occurrence'
 import { Address } from '@/domain/models/address'
+import { ErrorFactory } from '@/presentation/helpers/errors'
+import { Controller, HttpResponse } from '@/presentation/protocols'
+import { sucess } from '@/presentation/helpers/http/http'
 
 export class AddOccurrenceController implements Controller {
   constructor(

@@ -1,8 +1,8 @@
-import { OccurrenceDto } from '../../../domain/dto/occurrence-dto'
-import { AddOccurrence } from '../../../domain/usecases/occurrence/add-occurrence'
-import { UnauthorizedError } from '../../../presentation/helpers/errors/unauthorized-error'
-import { LoadAccountByIdRepository } from '../../protocols/repository/account/load-account-by-id-repository'
-import { AddOccurrenceRepositoy } from '../../protocols/repository/ocurrence/add-occurrence-repository'
+import { OccurrenceDto } from '@/domain/dto'
+import { AddOccurrence } from '@/domain/usecases/occurrence'
+import { UnauthorizedError } from '@/presentation/helpers/errors'
+import { LoadAccountByIdRepository } from '@/data/protocols/repository/account/load-account-by-id-repository'
+import { AddOccurrenceRepositoy } from '@/data/protocols/repository/ocurrence/add-occurrence-repository'
 
 export class AddOccurrenceUsecase implements AddOccurrence {
   constructor(

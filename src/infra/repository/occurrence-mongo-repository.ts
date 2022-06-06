@@ -1,8 +1,8 @@
-import { AddOccurrenceRepositoy } from '../../data/protocols/repository/ocurrence/add-occurrence-repository'
-import { OccurrenceDto } from '../../domain/dto/occurrence-dto'
-import { MongoHelper } from './helper/mongo-helper'
-import { LoadOccurrenceByIdRepository } from '../../data/protocols/repository/ocurrence/load-occurrence-by-id-repository'
 import { ObjectID } from 'mongodb'
+import { MongoHelper } from './helper/mongo-helper'
+import { OccurrenceDto } from '@/domain/dto/occurrence-dto'
+import { AddOccurrenceRepositoy } from '@/data/protocols/repository/ocurrence/add-occurrence-repository'
+import { LoadOccurrenceByIdRepository } from '@/data/protocols/repository/ocurrence/load-occurrence-by-id-repository'
 
 export class OccurrenceMongoRepository implements AddOccurrenceRepositoy, LoadOccurrenceByIdRepository {
   async add(dto: OccurrenceDto): Promise<number> {

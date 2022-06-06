@@ -1,5 +1,5 @@
-import { AccountDto } from '../../dto/account-dto'
-import { Account } from '../../models/account'
+import { AccountDto } from '@/domain/dto'
+import { Account } from '@/domain/models'
 
 export interface AddAccount {
   create (dto: AccountDto): Promise<AddAccount.Result>

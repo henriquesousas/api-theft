@@ -1,7 +1,7 @@
-import { LoadAccountByToken } from '../../../domain/usecases/middleware/load-account-by-token'
-import { Decrypter } from '../../../data/protocols/cryptography/decrypter'
-import { LoadAccountByIdRepository } from '../../../data/protocols/repository/account/load-account-by-id-repository'
-import { UnauthorizedError } from '../../../presentation/helpers/errors/unauthorized-error'
+import { LoadAccountByToken } from '@/domain/usecases/middleware/load-account-by-token'
+import { Decrypter } from '@/data/protocols/cryptography'
+import { LoadAccountByIdRepository } from '@/data/protocols/repository/account'
+import { UnauthorizedError } from '@/presentation/helpers/errors'
 
 export class LoadAccountByTokenUseCase implements LoadAccountByToken {
   constructor(
