@@ -4,7 +4,7 @@ import { ValidationRequiredField } from '../../../validators/validation-required
 
 export const makeAddOccurrenceValidationFactory = (): Validation => {
   const validations: Validation[] = []
-  for (const field of ['userId', 'title', 'description', 'product', 'dateOccurrence']) {
+  for (const field of ['userId', 'title', 'description', 'product', 'dateOfOccurrence']) {
     validations.push(new ValidationRequiredField(field))
   }
   return new ValidationComposite(validations)

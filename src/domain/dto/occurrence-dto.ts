@@ -6,5 +6,7 @@ export interface OccurrenceDto {
   description: string
   address: Address
   product: number
-  dateOccurrence: Date
+  dateOfOccurrence: Date
+  createdAt: Date
+  updateaAt: Date
 }

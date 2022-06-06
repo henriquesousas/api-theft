@@ -13,14 +13,17 @@ export class AddOccurrenceController implements Controller {
   async handle(request: AddOccurrenceController.Request): Promise<HttpResponse> {
     try {
       this.validation.validate(request)
-      const { userId, title, description, address, product, dateOccurrence } = request
+      const { userId, title, description, address, product, dateOfOccurrence } = request
+      const createdAt = new Date()
       const occurrenceId = await this.usecase.add({
         userId,
         title,
         description,
         address,
         product,
-        dateOccurrence
+        dateOfOccurrence,
+        createdAt,
+        updateaAt: createdAt
       })
       return sucess({ id: occurrenceId })
     } catch (error) {
@@ -36,6 +39,6 @@ export namespace AddOccurrenceController {
     description: string
     address: Address
     product: number
-    dateOccurrence: Date
+    dateOfOccurrence: Date
   }
 }
