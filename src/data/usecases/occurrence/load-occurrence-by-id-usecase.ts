@@ -4,9 +4,9 @@ import { NotFoundError } from '../../../presentation/helpers/errors/not-found-er
 import { LoadOccurrenceByIdRepository } from '../../protocols/repository/ocurrence/load-occurrence-by-id-repository'
 
 export class LoadOccurrenceByIdUseCase implements LoadOccurrenceById {
-  constructor(private readonly loadOccurreceByIdRepository: LoadOccurrenceByIdRepository) { }
+  constructor(private readonly repository: LoadOccurrenceByIdRepository) { }
   async loadById(id: string): Promise<Occurrence> {
-    const occurrence = await this.loadOccurreceByIdRepository.loadById(id)
+    const occurrence = await this.repository.loadById(id)
     if (!occurrence) throw new NotFoundError()
     return occurrence
   }
