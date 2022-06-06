@@ -12,11 +12,8 @@ export const expressRouterAdapter = (controller: Controller) => {
       res.status(httpResponse.statusCode).json(httpResponse.body)
     } else {
       res.status(httpResponse.statusCode).json({
-        success: false,
-        error: {
-          type: httpResponse.body.name,
-          message: httpResponse.body.message
-        }
+        message: httpResponse.body.message,
+        type: httpResponse.body.name
       })
     }
   }

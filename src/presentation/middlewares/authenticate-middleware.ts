@@ -1,7 +1,6 @@
 
 import { Middleware } from '../protocols/middleware'
-import { forbidden, sucess } from '../helpers/http/http'
-import { AccessDeniedError } from '../helpers/errors/access-denied-error'
+import { sucess, unauthorized } from '../helpers/http/http'
 import { ErrorFactory } from '../helpers/errors/error-factory'
 import { LoadAccountByToken } from '../../domain/usecases/middleware/load-account-by-token'
 import { HttpRequest, HttpResponse } from '../protocols'
@@ -21,7 +20,7 @@ export class AuthenticateMiddleware implements Middleware {
           return sucess(account)
         }
       }
-      return forbidden(new AccessDeniedError())
+      return unauthorized()
     } catch (error) {
       return new ErrorFactory().get(error)
     }
