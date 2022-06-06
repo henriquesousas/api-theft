@@ -5,9 +5,11 @@ import { LoadOccurrenceByIdRepository } from '../../data/protocols/repository/oc
 import { ObjectID } from 'mongodb'
 
 export class OccurrenceMongoRepository implements AddOccurrenceRepositoy, LoadOccurrenceByIdRepository {
-  async add(dto: OccurrenceDto): Promise<void> {
+  async add(dto: OccurrenceDto): Promise<number> {
     const occurrenceCollection = await MongoHelper.getCollection('occurrences')
-    await occurrenceCollection.insertOne(dto)
+    const data = await occurrenceCollection.insertOne(dto)
+    const occurrenceId = data.ops[0]._id
+    return occurrenceId
   }
 
   async loadById(id: any): Promise<any> {

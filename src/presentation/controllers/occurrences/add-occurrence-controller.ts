@@ -1,20 +1,20 @@
 import { sucess } from '../../helpers/http/http'
 import { ErrorFactory } from '../../helpers/errors'
-import { CreateOccurrence } from '../../../domain/usecases/occurrence'
+import { AddOccurrence } from '../../../domain/usecases/occurrence'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 import { Validation } from '@/domain/validators'
 import { Address } from '@/domain/models/address'
 
 export class AddOccurrenceController implements Controller {
   constructor(
-    private readonly createOccurrenceUseCase: CreateOccurrence,
+    private readonly useCase: AddOccurrence,
     private readonly validation: Validation) { }
 
   async handle(request: AddOccurrenceController.Request): Promise<HttpResponse> {
     try {
       this.validation.validate(request)
       const { userId, title, description, address, product, dateOccurrence } = request
-      await this.createOccurrenceUseCase.add({
+      const occurrenceId = await this.useCase.add({
         userId,
         title,
         description,
@@ -23,8 +23,8 @@ export class AddOccurrenceController implements Controller {
         dateOccurrence
       })
       return sucess({
-        status: true,
-        message: 'Ocorrência cadastrada com sucesso'
+        success: true,
+        id: occurrenceId
       })
     } catch (error) {
       return new ErrorFactory().get(error)
