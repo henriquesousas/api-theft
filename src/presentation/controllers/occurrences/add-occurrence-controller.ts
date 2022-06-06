@@ -7,14 +7,14 @@ import { Address } from '@/domain/models/address'
 
 export class AddOccurrenceController implements Controller {
   constructor(
-    private readonly useCase: AddOccurrence,
+    private readonly usecase: AddOccurrence,
     private readonly validation: Validation) { }
 
   async handle(request: AddOccurrenceController.Request): Promise<HttpResponse> {
     try {
       this.validation.validate(request)
       const { userId, title, description, address, product, dateOccurrence } = request
-      const occurrenceId = await this.useCase.add({
+      const occurrenceId = await this.usecase.add({
         userId,
         title,
         description,
@@ -22,10 +22,7 @@ export class AddOccurrenceController implements Controller {
         product,
         dateOccurrence
       })
-      return sucess({
-        success: true,
-        id: occurrenceId
-      })
+      return sucess({ id: occurrenceId })
     } catch (error) {
       return new ErrorFactory().get(error)
     }
