@@ -1,5 +1,5 @@
-import { Hasher } from '../../../src/data/protocols/cryptography/hasher'
-import { AddAccountRepositoy } from '../protocols/repository/account/add-account-repository'
+import { Hash } from '@/data/protocols/cryptography/hash'
+import { AddAccountRepository } from '../protocols/repository/account/add-account-repository'
 import { LoadAccountByEmailRepository } from '../../../src/data/protocols/repository/account/load-account-by-email-repository'
 import { AddAccountUseCase } from '../../../src/data/usecases/account/add-account-usecase'
 import { EmailInUseError } from '../../../src/presentation/helpers/errors/email-in-user-error'
@@ -11,9 +11,9 @@ import { JwtAdapter } from '@/infra/criptography'
 
 type SutTypes = {
   sut: AddAccountUseCase
-  addAccountRepositoryStub: AddAccountRepositoy
+  addAccountRepositoryStub: AddAccountRepository
   loadByEmailRepositoryStub: LoadAccountByEmailRepository
-  hasherStub: Hasher
+  hasherStub: Hash
 }
 
 const mockSut = (): SutTypes => {

@@ -3,7 +3,7 @@ import { AddOccurrence } from '@/domain/usecases/occurrence'
 import { Address } from '@/domain/models/address'
 import { ErrorFactory } from '@/presentation/helpers/errors'
 import { Controller, HttpResponse } from '@/presentation/protocols'
-import { sucess } from '@/presentation/helpers/http/http'
+import { success } from '@/presentation/helpers/http/http'
 
 export class AddOccurrenceController implements Controller {
   constructor(
@@ -25,7 +25,7 @@ export class AddOccurrenceController implements Controller {
         createdAt,
         updateAt: createdAt
       })
-      return sucess({ id: occurrenceId })
+      return success({ id: occurrenceId })
     } catch (error) {
       return new ErrorFactory().get(error)
     }

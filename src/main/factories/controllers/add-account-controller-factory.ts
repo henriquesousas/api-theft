@@ -1,12 +1,12 @@
 import { Controller } from '@/presentation/protocols'
 import { makeCreateAccounttUseCaseFactory } from '@/main/factories/usecases/add-account-usecase-factory'
 import { makeCreateAccountValidatorFactory } from '@/main/factories/validators/signup-validator-factory'
-import { LogguerControllerDecorator } from '@/main/decorator/logguer-controller.decorator'
+import { LogControllerDecorator } from '@/main/decorator/log-controller.decorator'
 import { AddAccountController } from '@/presentation/controllers/account/add-account-controller'
 import { LogguerMongoRepository } from '@/infra/repository/logguer-mongo-repository'
 
 export const makeAddAccountControllerFactory = (): Controller => {
-  const createAccountController = new AddAccountController(makeCreateAccountValidatorFactory(), makeCreateAccounttUseCaseFactory())
-  const loguerRepository = new LogguerMongoRepository()
-  return new LogguerControllerDecorator(createAccountController, loguerRepository)
+  return new LogControllerDecorator(
+    new AddAccountController(makeCreateAccountValidatorFactory(), makeCreateAccounttUseCaseFactory()),
+    new LogguerMongoRepository())
 }

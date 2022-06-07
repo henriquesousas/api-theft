@@ -1,4 +1,4 @@
-export * from './decrypter'
-export * from './encrypter'
+export * from './decrypt'
+export * from './encrypt'
 export * from './hasher-comparer'
-export * from './hasher'
+export * from './hash'

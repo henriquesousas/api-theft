@@ -1,4 +1,4 @@
-import { Encrypter } from '../../../../src/data/protocols/cryptography/encrypter'
+import { Encrypt } from '@/data/protocols/cryptography/encrypt'
 import { HashComparer } from '../../../../src/data/protocols/cryptography/hasher-comparer'
 
 export const mockHasherComparer = (): HashComparer => {
@@ -11,8 +11,8 @@ export const mockHasherComparer = (): HashComparer => {
 }
 
 
-export const mockJwtAdapter = (): Encrypter => {
-  class JwtAdapterStub implements Encrypter {
+export const mockJwtAdapter = (): Encrypt => {
+  class JwtAdapterStub implements Encrypt {
     encrypt(valeu: string): Promise<string> {
       return new Promise(resolve => resolve(''))
     }

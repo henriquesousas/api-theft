@@ -1,15 +1,15 @@
-import { LogguerRepository } from '@/data/protocols/repository/logguer/logguer-repository'
+import { LogRepository } from '@/data/protocols/repository/logguer/log-repository'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 
-export class LogguerControllerDecorator implements Controller {
+export class LogControllerDecorator implements Controller {
   constructor(
     private readonly controller: Controller,
-    private readonly logguerRepository: LogguerRepository) { }
+    private readonly logRepository: LogRepository) { }
 
   async handle(request: any): Promise<HttpResponse> {
     const httpResponse = await this.controller.handle(request)
     if (httpResponse.statusCode === 500) {
-      await this.logguerRepository.log(httpResponse.body.stack)
+      await this.logRepository.log(httpResponse.body.stack)
     }
     return httpResponse
   }

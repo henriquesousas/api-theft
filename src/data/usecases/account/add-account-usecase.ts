@@ -1,14 +1,14 @@
 import { AccountDto } from '@/domain/dto'
 import { AddAccount } from '@/domain/usecases/account'
 import { EmailInUseError } from '@/presentation/helpers/errors'
-import { Hasher, Encrypter } from '@/data/protocols/cryptography'
-import { AddAccountRepositoy, LoadAccountByEmailRepository } from '@/data/protocols/repository/account'
+import { Hash, Encrypt } from '@/data/protocols/cryptography'
+import { AddAccountRepository, LoadAccountByEmailRepository } from '@/data/protocols/repository/account'
 
 export class AddAccountUseCase implements AddAccount {
   constructor(
-    private readonly hasher: Hasher,
-    private readonly jwtEncrypter: Encrypter,
-    private readonly addAccountRepository: AddAccountRepositoy,
+    private readonly hash: Hash,
+    private readonly encrypt: Encrypt,
+    private readonly addAccountRepository: AddAccountRepository,
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) { }
 
@@ -17,10 +17,10 @@ export class AddAccountUseCase implements AddAccount {
     if (account) {
       throw new EmailInUseError()
     }
-    const hashedPassword = await this.hasher.hash(dto.password)
+    const hashedPassword = await this.hash.hash(dto.password)
     const reassignDtoWithHashedPassword = Object.assign(dto, { password: hashedPassword })
     const newAccount = await this.addAccountRepository.create(reassignDtoWithHashedPassword)
-    const accessToken = await this.jwtEncrypter.encrypt(newAccount.id)
+    const accessToken = await this.encrypt.encrypt(newAccount.id)
     return {
       accessToken,
       account: newAccount

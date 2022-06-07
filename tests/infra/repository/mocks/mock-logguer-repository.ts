@@ -1,7 +1,7 @@
-import { LogguerRepository } from '../../../../src/data/protocols/repository/logguer/logguer-repository'
+import { LogRepository } from '@/data/protocols/repository/logguer/log-repository'
 
-export const mockLogguerRepository = (): LogguerRepository => {
-  class LogguerRepositoryStub implements LogguerRepository {
+export const mockLogguerRepository = (): LogRepository => {
+  class LogguerRepositoryStub implements LogRepository {
     async log(message: string): Promise<void> {
     }
   }

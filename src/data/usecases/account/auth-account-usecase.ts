@@ -1,13 +1,13 @@
 import { Authentication } from '@/domain/usecases/account/authentication'
-import { Encrypter } from '@/data/protocols/cryptography/encrypter'
+import { Encrypt } from '@/data/protocols/cryptography/encrypt'
 import { HashComparer } from '@/data/protocols/cryptography/hasher-comparer'
 import { UnauthorizedError } from '@/presentation/helpers/errors'
 import { LoadAccountByEmailRepository } from '@/data/protocols/repository/account/load-account-by-email-repository'
 
 export class AuthAccountUseCase implements Authentication {
   constructor(
-    private readonly hasher: HashComparer,
-    private readonly encrypter: Encrypter,
+    private readonly hash: HashComparer,
+    private readonly encrypt: Encrypt,
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) { }
 
@@ -16,11 +16,11 @@ export class AuthAccountUseCase implements Authentication {
     if (!account) {
       throw new UnauthorizedError()
     }
-    const isValid = await this.hasher.comparer(password, account.password)
+    const isValid = await this.hash.comparer(password, account.password)
     if (!isValid) {
       throw new UnauthorizedError()
     }
-    const accessToken = await this.encrypter.encrypt(account.id)
+    const accessToken = await this.encrypt.encrypt(account.id)
     return {
       account,
       accessToken

@@ -1,17 +1,17 @@
 import { LoadAccountByTokenUseCase } from '../../../src/data/usecases/middleware/load-account-by-token-usecase'
 import { LoadAccountByToken } from '../../../src/domain/usecases/middleware/load-account-by-token'
-import { Decrypter } from '../../../src/data/protocols/cryptography/decrypter'
+import { Decrypt } from '@/data/protocols/cryptography/decrypt'
 import { mockLoadAccountByIdRepository } from '../../infra/repository/mocks'
 import { LoadAccountByIdRepository } from '../../../src/data/protocols/repository/account/load-account-by-id-repository'
 
 type SutTypes = {
   sut: LoadAccountByToken
-  decrypterStub: Decrypter
+  decrypterStub: Decrypt
   loadAccountByIdRepositoryStub: LoadAccountByIdRepository
 }
 
-const mockDecrypterStub = (): Decrypter => {
-  class DecrypterStub implements Decrypter {
+const mockDecrypterStub = (): Decrypt => {
+  class DecrypterStub implements Decrypt {
     async decrypt(value: string): Promise<string> {
       return await new Promise(resolve => resolve('any_value'))
     }

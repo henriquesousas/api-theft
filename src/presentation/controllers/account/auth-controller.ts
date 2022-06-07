@@ -2,7 +2,7 @@ import { Validation } from '@/domain/validators'
 import { Authentication } from '@/domain/usecases/account'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 import { ErrorFactory } from '@/presentation/helpers/errors'
-import { sucess } from '@/presentation/helpers/http/http'
+import { success } from '@/presentation/helpers/http/http'
 
 export class AuthController implements Controller {
   constructor(
@@ -15,7 +15,7 @@ export class AuthController implements Controller {
       this.validation.validate(request)
       const { email, password } = request
       const account = await this.useCase.auth(email, password)
-      return sucess(account)
+      return success(account)
     } catch (error) {
       return new ErrorFactory().get(error)
     }

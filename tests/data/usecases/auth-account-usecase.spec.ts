@@ -1,4 +1,4 @@
-import { Encrypter } from '../protocols/cryptography/encrypter'
+import { Encrypt } from '../protocols/cryptography/encrypter'
 import { HashComparer } from '../protocols/cryptography/hasher-comparer'
 import { LoadAccountByEmailRepository } from '../protocols/repository/account/load-account-by-email-repository'
 import { UpdateAccessTokenRepository } from '../protocols/repository/account/update-access-token-repository'
@@ -14,7 +14,7 @@ type SutTypes = {
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
   updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
   hasherComparerStub: HashComparer
-  jwtAdapterEncrypterStub: Encrypter
+  jwtAdapterEncrypterStub: Encrypt
 }
 
 const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {

@@ -1,3 +1,3 @@
-export interface LogguerRepository {
+export interface LogRepository {
   log(message: string): Promise<void>
 }

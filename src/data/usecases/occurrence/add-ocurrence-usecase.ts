@@ -4,7 +4,7 @@ import { UnauthorizedError } from '@/presentation/helpers/errors'
 import { LoadAccountByIdRepository } from '@/data/protocols/repository/account/load-account-by-id-repository'
 import { AddOccurrenceRepositoy } from '@/data/protocols/repository/ocurrence/add-occurrence-repository'
 
-export class AddOccurrenceUsecase implements AddOccurrence {
+export class AddOccurrenceUseCase implements AddOccurrence {
   constructor(
     private readonly addOccurrenceRepository: AddOccurrenceRepositoy,
     private readonly loadAccountByIdRepository: LoadAccountByIdRepository) { }

@@ -1,5 +1,5 @@
 import { ErrorFactory } from '@/presentation/helpers/errors'
-import { sucess } from '@/presentation/helpers/http/http'
+import { success } from '@/presentation/helpers/http/http'
 import { AddAccount } from '@/domain/usecases/account'
 import { Validation } from '@/domain/validators'
 import { Controller, HttpResponse } from '@/presentation/protocols'
@@ -19,7 +19,7 @@ export class AddAccountController implements Controller {
         email,
         password
       })
-      return sucess(account)
+      return success(account)
     } catch (error) {
       return new ErrorFactory().get(error)
     }

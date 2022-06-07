@@ -1,21 +1,21 @@
 import { Controller } from '../../../presentation/protocols/controller'
-import { LogguerRepository } from '../../../../src/data/protocols/repository/logguer/logguer-repository'
+import { LogRepository } from '@/data/protocols/repository/logguer/log-repository'
 import { serverError } from '../../../../src/presentation/helpers/http/http'
-import { LogguerControllerDecorator } from '@/main/decorator/logguer-controller.decorator'
+import { LogControllerDecorator } from '@/main/decorator/log-controller.decorator'
 import { mockLogguerRepository } from '../../../infra/repository/mocks'
 import { mockBaseController } from '../../../controllers/mocks/mock-controller'
 import { mockCreateAccountRequest } from '../../../http'
 
 type SutType = {
-  sut: LogguerControllerDecorator
-  logguerRepositoryStub: LogguerRepository
+  sut: LogControllerDecorator
+  logguerRepositoryStub: LogRepository
   controllerStub: Controller
 }
 
 const mockSut = (): SutType => {
   const controllerStub = mockBaseController()
   const logguerRepositoryStub = mockLogguerRepository()
-  const sut = new LogguerControllerDecorator(controllerStub, logguerRepositoryStub)
+  const sut = new LogControllerDecorator(controllerStub, logguerRepositoryStub)
   return {
     sut,
     logguerRepositoryStub,
