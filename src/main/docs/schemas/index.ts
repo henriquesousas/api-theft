@@ -1,6 +1,5 @@
-export * from './account-body-schema'
-export * from './account-schema'
-export * from './error-schema'
-export * from './account-model-schema'
-
-
+export * from './dtos/auth-dto-schema'
+export * from './dtos/account-create-dto-schema'
+export * from './response/account-response-schema'
+export * from './response/error-response-schema'
+export * from './models/account-model-schema'

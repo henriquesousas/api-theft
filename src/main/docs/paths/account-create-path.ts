@@ -1,12 +1,12 @@
-export const authPath = {
+export const accountCreatePath = {
   post: {
-    tags: ['Login'],
-    summary: 'Api para autenticar usuário',
+    tags: ['Cadastrar conta'],
+    summary: 'Api para cadastro de uma conta',
     requestBody: {
       content: {
         'application/json': {
           schema: {
-            $ref: '#/schemas/authBody'
+            $ref: '#/schemas/accountCreateDto'
           }
         }
       }

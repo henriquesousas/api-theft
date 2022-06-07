@@ -1,6 +1,7 @@
 import { authPath } from '@/main/docs/paths'
-import { errorSchema, accountBodySchema, accountSchema, accountModelSchema } from '@/main/docs/schemas'
+import { errorResponseSchema, authDtoSchema, accountResponseSchema, accountModelSchema, accountCreateDtoSchema } from '@/main/docs/schemas'
 import { badRequest, serverError, unauthorized } from '@/main/docs/components'
+import { accountCreatePath } from '@/main/docs/paths/account-create-path'
 
 export default {
   openapi: '3.0.0',
@@ -21,17 +22,22 @@ export default {
     description: 'Servidor Principal'
   }],
   tags: [{
-    name: 'Authenticate',
+    name: 'Login',
     description: 'Api relacionada a autenticação'
+  }, {
+    name: 'Cadastrar conta',
+    description: 'Api relacionada a criação da conta de usuário'
   }],
   paths: {
-    '/auth': authPath
+    '/auth': authPath,
+    '/account/create': accountCreatePath
   },
   schemas: {
-    account: accountSchema,
-    authBody: accountBodySchema,
-    error: errorSchema,
-    accountModel: accountModelSchema
+    account: accountResponseSchema,
+    authBody: authDtoSchema,
+    error: errorResponseSchema,
+    accountModel: accountModelSchema,
+    accountCreateDto: accountCreateDtoSchema
   },
   components: {
     badRequest,
