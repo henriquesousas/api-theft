@@ -1,6 +1,6 @@
 export const authPath = {
   post: {
-    tag: ['Authenticate'],
+    tags: ['Authenticate'],
     summary: 'Api para autenticar usuário',
     requestBody: {
       content: {
@@ -23,7 +23,13 @@ export const authPath = {
         }
       },
       400: {
-        description: 'Bad request'
+        $ref: '#/components/badRequest'
+      },
+      401: {
+        $ref: '#/components/unauthorized'
+      },
+      500: {
+        $ref: '#/components/serverError'
       }
     }
   }
