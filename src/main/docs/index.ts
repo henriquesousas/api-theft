@@ -1,5 +1,5 @@
 import { authPath } from '@/main/docs/paths'
-import { errorSchema, accountBodySchema, accountSchema } from '@/main/docs/schemas'
+import { errorSchema, accountBodySchema, accountSchema, accountModelSchema } from '@/main/docs/schemas'
 import { badRequest, serverError, unauthorized } from '@/main/docs/components'
 
 export default {
@@ -30,7 +30,8 @@ export default {
   schemas: {
     account: accountSchema,
     authBody: accountBodySchema,
-    error: errorSchema
+    error: errorSchema,
+    accountModel: accountModelSchema
   },
   components: {
     badRequest,
