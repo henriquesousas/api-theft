@@ -8,5 +8,5 @@ export interface OccurrenceDto {
   product: number
   dateOfOccurrence: Date
   createdAt: Date
-  updateaAt: Date
+  updateAt: Date
 }

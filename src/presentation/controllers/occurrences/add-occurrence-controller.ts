@@ -7,7 +7,7 @@ import { sucess } from '@/presentation/helpers/http/http'
 
 export class AddOccurrenceController implements Controller {
   constructor(
-    private readonly usecase: AddOccurrence,
+    private readonly useCase: AddOccurrence,
     private readonly validation: Validation) { }
 
   async handle(request: AddOccurrenceController.Request): Promise<HttpResponse> {
@@ -15,7 +15,7 @@ export class AddOccurrenceController implements Controller {
       this.validation.validate(request)
       const { userId, title, description, address, product, dateOfOccurrence } = request
       const createdAt = new Date()
-      const occurrenceId = await this.usecase.add({
+      const occurrenceId = await this.useCase.add({
         userId,
         title,
         description,
@@ -23,7 +23,7 @@ export class AddOccurrenceController implements Controller {
         product,
         dateOfOccurrence,
         createdAt,
-        updateaAt: createdAt
+        updateAt: createdAt
       })
       return sucess({ id: occurrenceId })
     } catch (error) {
