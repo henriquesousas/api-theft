@@ -30,7 +30,7 @@ export default {
   }],
   paths: {
     '/auth': authPath,
-    '/account/create': accountCreatePath
+    '/account': accountCreatePath
   },
   schemas: {
     account: accountResponseSchema,
