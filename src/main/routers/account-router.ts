@@ -1,10 +1,16 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
-import { makeAddAccountControllerFactory } from '@/main/factories/controllers/add-account-controller-factory'
-import { expressRouterAdapter } from '@/main/adapters'
-import { makeAuthControllerFactory } from '@/main/factories'
+import { expressMiddlewareAdapter, expressRouterAdapter } from '@/main/adapters'
+import {
+  makeAddAccountControllerFactory,
+  makeAuthControllerFactory,
+  makeAuthMiddlewareFactory,
+  makeUpdateAccountControllerFactory
+} from '@/main/factories'
 
 export default (router: Router): void => {
-  router.post('/account/create', expressRouterAdapter(makeAddAccountControllerFactory()))
+  const adminAuthMiddleware = expressMiddlewareAdapter(makeAuthMiddlewareFactory('admin'))
   router.post('/auth', expressRouterAdapter(makeAuthControllerFactory()))
+  router.post('/account', expressRouterAdapter(makeAddAccountControllerFactory()))
+  router.put('/account/:accountId', adminAuthMiddleware, expressRouterAdapter(makeUpdateAccountControllerFactory()))
 }

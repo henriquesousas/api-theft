@@ -5,15 +5,20 @@ import { Validation } from '@/domain/validators'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 
 export class AddAccountController implements Controller {
-  constructor(
+  constructor (
     private readonly validation: Validation,
     private readonly useCase: AddAccount
-  ) { }
+  ) {
+  }
 
-  async handle(request: AddAccountController.Request): Promise<HttpResponse> {
+  async handle (request: AddAccountController.Request): Promise<HttpResponse> {
     try {
       this.validation.validate(request)
-      const { name, email, password } = request
+      const {
+        name,
+        email,
+        password
+      } = request
       const account = await this.useCase.create({
         name,
         email,

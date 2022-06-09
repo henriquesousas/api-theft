@@ -6,37 +6,57 @@ import {
   AddAccountRepository,
   LoadAccountByEmailRepository,
   LoadAccountByIdRepository,
-  UpdateAccessTokenRepository
+  UpdateAccessTokenRepository,
+  UpdateAccountRepository
 } from '@/data/protocols/repository/account/'
+import { UpdateAccountDto } from '@/domain/dto'
 
-export class AccountMongoRepository implements AddAccountRepository, LoadAccountByEmailRepository, LoadAccountByIdRepository, UpdateAccessTokenRepository {
+export class AccountMongoRepository implements AddAccountRepository, LoadAccountByEmailRepository, LoadAccountByIdRepository, UpdateAccessTokenRepository, UpdateAccountRepository {
   private readonly collection = 'accounts'
-  async create(dto: AccountDto): Promise<Account> {
+
+  async create (dto: AccountDto): Promise<Account> {
     const accountCollection = MongoHelper.getCollection(this.collection)
     const result = await accountCollection.insertOne(dto)
     return MongoHelper.map(result.ops[0])
   }
 
-  async loadByEmail(email: string): Promise<Account> {
+  async loadByEmail (email: string): Promise<Account> {
     const accountCollection = MongoHelper.getCollection(this.collection)
     const account = await accountCollection.findOne({ email })
     return account && MongoHelper.map(account)
   }
 
-  async loadById(id: string): Promise<Account> {
+  async loadById (id: string): Promise<Account> {
     const accountCollection = await MongoHelper.getCollection(this.collection)
     const accountId = new ObjectId(id)
     const account = await accountCollection.findOne({ _id: accountId })
     return account && MongoHelper.map(account)
   }
 
-  async updateAccessToken(id: string, token: string): Promise<void> {
+  async updateAccessToken (id: string, token: string): Promise<void> {
     const accountCollection = await MongoHelper.getCollection(this.collection)
     accountCollection.updateOne({
       _id: id
     }, {
       $set: {
         accessToken: token
+      }
+    })
+  }
+
+  async update (updateAccountDto: UpdateAccountDto): Promise<void> {
+    const accountCollection = await MongoHelper.getCollection(this.collection)
+    const {
+      accountId,
+      name,
+      email
+    } = updateAccountDto
+    await accountCollection.updateOne({
+      _id: ObjectId(accountId)
+    }, {
+      $set: {
+        name,
+        email
       }
     })
   }
