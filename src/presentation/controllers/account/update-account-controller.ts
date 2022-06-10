@@ -1,32 +1,29 @@
 import { Controller, HttpResponse } from '@/presentation/protocols'
 import { UpdateAccount } from '@/domain/usecases/account'
-import { success } from '@/presentation/helpers/http/http'
-import { ErrorFactory } from '@/presentation/helpers/errors'
+import { error, serverError, success } from '@/presentation/helpers/http/http'
 import { Validation } from '@/domain/validators'
+
 export class UpdateAccountController implements Controller {
-  constructor (
+  constructor(
     private readonly validation: Validation,
     private readonly updateAccountUseCase: UpdateAccount) {
   }
 
-  async handle (request: UpdateAccountController.Request): Promise<HttpResponse> {
+  async handle(request: UpdateAccountController.Request): Promise<HttpResponse> {
     try {
-      this.validation.validate(request)
-      const {
-        accountId,
-        name,
-        email
-      } = request
+      const validationResult = this.validation.validate(request)
+      if (validationResult.isLeft()) {
+        return error(validationResult.value)
+      }
+      const { accountId, name, email } = request
       await this.updateAccountUseCase.update({
         accountId,
         name,
         email
       })
-      return success({
-        message: 'Conta alterada com sucesso'
-      })
+      return success({ message: 'success' })
     } catch (error) {
-      return new ErrorFactory().get(error)
+      return serverError(error)
     }
   }
 }

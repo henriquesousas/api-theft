@@ -1,10 +1,9 @@
 import { ObjectID } from 'mongodb'
 import { MongoHelper } from './helper/mongo-helper'
 import { OccurrenceDto } from '@/domain/dto/occurrence-dto'
-import { AddOccurrenceRepositoy } from '@/data/protocols/repository/ocurrence/add-occurrence-repository'
-import { LoadOccurrenceByIdRepository } from '@/data/protocols/repository/ocurrence/load-occurrence-by-id-repository'
+import { AddOccurrenceRepository, LoadOccurrenceByIdRepository } from '@/data/protocols/repository/occurrence'
 
-export class OccurrenceMongoRepository implements AddOccurrenceRepositoy, LoadOccurrenceByIdRepository {
+export class OccurrenceMongoRepository implements AddOccurrenceRepository, LoadOccurrenceByIdRepository {
   async add(dto: OccurrenceDto): Promise<number> {
     const occurrenceCollection = await MongoHelper.getCollection('occurrences')
     const data = await occurrenceCollection.insertOne(dto)

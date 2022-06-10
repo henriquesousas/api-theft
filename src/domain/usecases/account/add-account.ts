@@ -1,13 +1,13 @@
+import { AddAccountResponse } from '@/data/usecases/account/add/add-account-response'
 import { AccountDto } from '@/domain/dto'
-import { Account } from '@/domain/models'
 
 export interface AddAccount {
-  create (dto: AccountDto): Promise<AddAccount.Result>
+  create(dto: AccountDto): Promise<AddAccountResponse>
 }
 
 export namespace AddAccount {
   export type Result = {
     accessToken: string
-    account: Account
+    accountId: string
   }
 }

@@ -1,3 +1,5 @@
+import { Either, right } from '@/presentation/helpers/either'
+import { AppError } from '@/presentation/helpers/errors/app-error'
 import { Validation } from '../domain/validators/validation'
 
 export class ValidationComposite implements Validation {
@@ -5,9 +7,13 @@ export class ValidationComposite implements Validation {
     private readonly validations: Validation[]
   ) { }
 
-  validate(input: any): void {
+  validate(input: any): Either<AppError, null> {
     for (const validation of this.validations) {
-      validation.validate(input)
+      const validationResult = validation.validate(input)
+      if (validationResult.isLeft()) {
+        return validationResult
+      }
     }
+    return right(null)
   }
 }

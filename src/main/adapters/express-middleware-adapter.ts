@@ -13,8 +13,7 @@ export const expressMiddlewareAdapter = (middleware: Middleware) => {
       next()
     } else {
       res.status(httpResponse.statusCode).json({
-        message: httpResponse.body.message,
-        type: httpResponse.body.name
+        message: httpResponse.body.message
       })
     }
   }

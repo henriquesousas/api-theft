@@ -1,5 +1,5 @@
 import { AddAccount } from '@/domain/usecases/account/add-account'
-import { AddAccountUseCase } from '@/data/usecases/account/add-account-usecase'
+import { AddAccountUseCase } from '@/data/usecases/account/add/add-account-usecase'
 import { BCrypter } from '@/infra/criptography/bcrypter'
 import { AccountMongoRepository } from '../../../../src/infra/repository/account-mongo-repository'
 import { JwtAdapter } from '@/infra/criptography'

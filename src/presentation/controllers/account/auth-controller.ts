@@ -1,30 +1,36 @@
 import { Validation } from '@/domain/validators'
 import { Authentication } from '@/domain/usecases/account'
 import { Controller, HttpResponse } from '@/presentation/protocols'
-import { ErrorFactory } from '@/presentation/helpers/errors'
-import { success } from '@/presentation/helpers/http/http'
+import { error, serverError, success } from '@/presentation/helpers/http/http'
 
-export class AuthController implements Controller {
-  constructor(
-    private readonly validation: Validation,
-    private readonly useCase: Authentication
-  ) { }
-
-  async handle(request: AuthenticateController.Request): Promise<HttpResponse> {
-    try {
-      this.validation.validate(request)
-      const { email, password } = request
-      const account = await this.useCase.auth(email, password)
-      return success(account)
-    } catch (error) {
-      return new ErrorFactory().get(error)
-    }
-  }
-}
-
-export namespace AuthenticateController {
+export namespace AuthController {
   export type Request = {
     email: string
     password: string
+  }
+}
+export class AuthController implements Controller {
+  constructor(
+    private readonly validation: Validation,
+    private readonly usecase: Authentication
+  ) { }
+
+  async handle(request: AuthController.Request): Promise<HttpResponse> {
+    try {
+      const validationResult = this.validation.validate(request)
+      if (validationResult.isLeft()) {
+        return error(validationResult.value)
+      }
+      const accountOrError = await this.usecase.auth({
+        email: request.email,
+        password: request.password
+      })
+      if (accountOrError.isLeft()) {
+        return error(accountOrError.value)
+      }
+      return success(accountOrError.value)
+    } catch (error) {
+      return serverError(error)
+    }
   }
 }

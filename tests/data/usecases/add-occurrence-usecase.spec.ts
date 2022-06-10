@@ -1,6 +1,6 @@
 import { LoadAccountByIdRepository } from '../protocols/repository/account/load-account-by-id-repository'
 import { AddOccurrenceRepositoy } from '../protocols/repository/ocurrence/add-occurrence-repository'
-import { AddOccurrenceUseCase } from '@/data/usecases/occurrence/add-ocurrence-usecase'
+import { AddOccurrenceUseCase } from '@/data/usecases/occurrence/add-occurrence-usecase'
 import { mockOccurrenceDto } from '../../domain/dto/mock-occurrence-dto'
 import { mockLoadAccountByIdRepository } from '../../infra/repository/mocks'
 import { mockAddOccurrenceRepository } from '../../infra/repository/mocks/mock-add-occurrence-repository'

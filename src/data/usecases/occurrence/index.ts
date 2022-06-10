@@ -1,2 +1,2 @@
-export * from './add-ocurrence-usecase'
+export * from './add-occurrence-usecase'
 export * from './load-occurrence-by-id-usecase'

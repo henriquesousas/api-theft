@@ -1,5 +1,5 @@
 import { OccurrenceDto } from '@/domain/dto/occurrence-dto'
 
-export interface AddOccurrenceRepositoy {
+export interface AddOccurrenceRepository {
   add(dto: OccurrenceDto): Promise<number>
 }

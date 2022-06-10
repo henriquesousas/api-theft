@@ -1,5 +1,13 @@
 import { HttpResponse } from '@/presentation/protocols/http-response'
 import { NotFoundError, ServerError, UnauthorizedError } from '@/presentation/helpers/errors'
+import { AppError } from '../errors/app-error'
+
+export const error = (error: AppError): HttpResponse => {
+  return {
+    statusCode: error.statusCode,
+    body: error
+  }
+}
 
 export const success = (data: any): HttpResponse => {
   return {
